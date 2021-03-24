@@ -9,13 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Courierapp">
+        <activity android:name=".RegisterNewCourier"></activity>
         <activity android:name=".DeliveryTable" />
         <activity android:name=".DeliveryHistory" />
-        <activity android:name=".RegisterNewCourier" />
-        <activity
-            android:name=".CourierMain">
-
-        </activity>
+        <activity android:name=".CourierMain" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
