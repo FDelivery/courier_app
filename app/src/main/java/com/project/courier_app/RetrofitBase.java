@@ -1,23 +1,22 @@
 package com.project.courier_app;
-// noting changed, completely copied from Business app
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitBase {
 
-    private static Retrofit retrofit;
-    private static RetrofitInterface retrofitInterface;
-    private static final String BASE_URL = "http://192.168.1.30:8080";
+    private Retrofit retrofit;
+    private RetrofitInterface retrofitInterface;
+    private final String BASE_URL = "http://192.168.1.30:8080";
 
-    private RetrofitBase() { }
-    public static RetrofitInterface getRetrofitInterface()
-    {
+    RetrofitBase() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        return retrofit.create(RetrofitInterface.class);
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
     }
+    public RetrofitInterface getRetrofitInterface() { return retrofitInterface; }
 
 
 
