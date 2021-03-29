@@ -5,6 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterNewCourier extends AppCompatActivity {
 
@@ -32,6 +39,7 @@ public class RegisterNewCourier extends AppCompatActivity {
             String firstname = FirstName.getText().toString();
             String phone = Phone.getText().toString();
             String lastname = LastName.getText().toString();
+            rtfBase = RetrofitBase.getRetrofitInterface();
 
             //we need to check that the required fields are not empty
             if(email.isEmpty()) {
@@ -68,48 +76,39 @@ public class RegisterNewCourier extends AppCompatActivity {
                 return;
             }
 
-
-//            Business business = phone2.isEmpty() ? new Business(email, phone1, address, bName, password)
-//                    : new Business(email, phone1, phone2, address, bName,password);
-//
-//            handleRegister(business);
+            handleRegister(new Courier(email, phone, firstname, lastname, password));
 
 
         });
     }
 
-    //still need to handle password...
-//   private void handleRegister(Business business) {
-//
-//      HashMap<String, String> credentials = new HashMap<>();
-//
-//      credentials.put("name",business.getBusinessName());
-//      credentials.put("email",business.getEmail());
-//      credentials.put("password", business.getPassword());
-//      credentials.put("address", business.getAddress());
-//      credentials.put("phone1", business.getPhoneNumber1());
-//      if(!business.getPhoneNumber2().isEmpty())
-//          credentials.put("phone2", business.getPhoneNumber2());
-//
-//
-//       Call<Void> call = rtfBase.register(credentials);
-//        call.enqueue(new Callback<Void>() {
-//           @Override
-//           public void onResponse(Call<Void> call, Response<Void> response) {
-//              if(response.code() == 200)
-//                   Toast.makeText(getApplicationContext(), "registered successfully",Toast.LENGTH_LONG).show();
-//                }
-//                if(response.code() == 400)
-//                {
-//                    Toast.makeText(getApplicationContext(), "you already registered",Toast.LENGTH_LONG).show();
-//                }
-//           }
-//
-//            @Override
-//            public void onFailure(Call<Void> call, Throwable t) {
-//              Toast.makeText(RegisterNewBusiness.this, t.getMessage(),Toast.LENGTH_LONG).show();
-//          }
-//       });
-//   }
+   private void handleRegister(Courier courier) {
+
+      HashMap<String, String> credentials = new HashMap<>();
+
+      credentials.put("FirstName",courier.getFirstName());
+       credentials.put("LastName",courier.getLastName());
+      credentials.put("email",courier.getEmail());
+      credentials.put("password", courier.getPassword());
+      credentials.put("phone", courier.getPhoneNumber());
+       Call<Void> call = rtfBase.register(credentials);
+
+        call.enqueue(new Callback<Void>() {
+           @Override
+           public void onResponse(Call<Void> call, Response<Void> response) {
+               if (response.code() == 200)
+                   Toast.makeText(getApplicationContext(), "registered successfully", Toast.LENGTH_LONG).show();
+
+               if (response.code() == 400) {
+                   Toast.makeText(getApplicationContext(), "you already registered", Toast.LENGTH_LONG).show();
+               }
+           }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+              Toast.makeText(RegisterNewCourier.this, t.getMessage(),Toast.LENGTH_LONG).show();
+          }
+       });
+   }
 
 }

@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 public interface RetrofitInterface
 {
     @POST("/connect")
-    Call<Void> connect(@Body HashMap<String, String> map);
+    Call<Courier> connect(@Body HashMap<String, String> map);
 
     @POST("/register")
     Call<Void> register(@Body HashMap<String, String> map);

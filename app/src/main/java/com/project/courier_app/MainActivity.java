@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button Connect;
     private TextView ForgotPassword;
     private TextView newCourier;
-  //  private RetrofitInterface rtfBase;
+    private RetrofitInterface rtfBase;
 
 
     @Override
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
- //       rtfBase = RetrofitBase.getRetrofitInterface();
+        rtfBase = RetrofitBase.getRetrofitInterface();
         EmailEt = (EditText)findViewById(R.id.Email);
         PasswordEt = (EditText)findViewById(R.id.Password);
         Connect=(Button)findViewById(R.id.Connect);
@@ -63,28 +63,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-  private void handleConnect() {}
-//        HashMap<String, String> credentials = new HashMap<>();
-//        credentials.put("email",EmailEt.getText().toString());
-//        credentials.put("password",PasswordEt.getText().toString());
-//        Call<Business> call = rtfBase.connect(credentials);
-//     @Override
-//        public void onResponse(Call<Business> call, Response<Business> response) {
-//                if(response.code() == 200)
-//                {
-//                    //success
-//                }
-//                if(response.code() == 400)
-//                {
-//                    //failure
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Business> call, Throwable t) {
- //               Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
-//            }
-//        });
- //   }
+  private void handleConnect() {
+        HashMap<String, String> credentials = new HashMap<>();
+        credentials.put("email",EmailEt.getText().toString());
+        credentials.put("password",PasswordEt.getText().toString());
+        Call<Courier> call = rtfBase.connect(credentials);
+        call.enqueue(new Callback<Courier>() {
+        @Override
+        public void onResponse(Call<Courier> call, Response<Courier> response) {
+                if(response.code() == 200)
+                {
+                    //success
+                }
+                if(response.code() == 400)
+                {
+                    //failure
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Courier> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }
