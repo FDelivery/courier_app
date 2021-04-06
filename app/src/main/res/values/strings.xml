@@ -2,10 +2,19 @@
     <string name="app_name">courier-app</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="forgetPass">
-        <u>Forgot password?</u>
-    </string>
-    <string name="newBusiness">
-        <u>Create an account</u>
-    </string>
+    <string name="forgetPass"><u>Forgot password?</u></string>
+    <string name="newBusiness"><u>Create an account</u></string>
+    <string name="Connect">Sign in</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="newCourier">Create an account</string>
+    <string name="FirstName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="PasswordEt">Password</string>
+    <string name="Phone">Phone number</string>
+    <string name="Text">Create your account</string>
+    <string name="Create">Create account</string>
+    <string name="EmailEt">Email</string>
+    <string name="useremail">HERE need to be  the user email FROM database</string>
+
 </resources>
