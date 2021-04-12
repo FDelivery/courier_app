@@ -15,6 +15,25 @@
     <string name="Text">Create your account</string>
     <string name="Create">Create account</string>
     <string name="EmailEt">Email</string>
-    <string name="useremail">HERE need to be  the user email FROM database</string>
+    <string name="textViewDeliveryRequest"> Choose New Delivery</string>
+    <string name="textViewDeliveryHistory"> My Delivery History</string>
+    <string name="textViewWelcom">hello (user name)</string>
+    <string name="textViewMyprofile"> My Profile</string>
+    <string name="textViewDeliveryList"> My Deliveries</string>
+    <string name="PhoneMP">HERE WE NEED THE COURIER PHONE  FORM DB</string>
+    <string name="textMP">HERE WE NEED THE COURIER FIRSTNAME AND LASTNAME FORM DB</string>
+    <string name="EmailMP">HERE WE NEED THE COURIER EMAIL FORM DB</string>
+    <string name="ChangeMP">Edit</string>
+    <string name="PassChangeMP">change password</string>
+    <string name="ConfirmNewPassword">Confirm new password</string>
+    <string name="NewPassword">Enter new password</string>
+    <string name="ConformPasswordChange">Save</string>
+    <string name="PhoneEP">HERE WE NEED THE COURIER PHONE  FORM DB</string>
+    <string name="LastNameEP">HERE WE NEED THE COURIER PHONE 2 FORM DB</string>
+    <string name="textEP">Edit Profile</string>
+    <string name="EmailEP">HERE WE NEED THE COURIERS EMAIL FORM DB</string>
+    <string name="ChangeEP">Save</string>
+    <string name="FirstNameEP">HERE WE NEED THE COURIER NAME FORM DB</string>
+
 
 </resources>

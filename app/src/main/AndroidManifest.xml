@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Courierapp">
-        <activity android:name=".RegisterNewCourier"></activity>
+        <activity android:name=".EditMyProfile"></activity>
+        <activity android:name=".ChangePassword" />
+        <activity android:name=".ChooseDelivery" />
+        <activity android:name=".CourierProfile" />
+        <activity android:name=".RegisterNewCourier" />
         <activity android:name=".DeliveryTable" />
         <activity android:name=".DeliveryHistory" />
         <activity android:name=".CourierMain" />
