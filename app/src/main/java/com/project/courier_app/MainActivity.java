@@ -63,28 +63,35 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-  private void handleConnect() {
+    private void handleConnect() { //צריך שהשרת יחזיר לי אוביקט יוזר ואז אוכל להוסיף מה שצריך לפונקציה
         HashMap<String, String> credentials = new HashMap<>();
         credentials.put("email",EmailEt.getText().toString());
         credentials.put("password",PasswordEt.getText().toString());
-        Call<Courier> call = rtfBase.connect(credentials);
-        call.enqueue(new Callback<Courier>() {
-        @Override
-        public void onResponse(Call<Courier> call, Response<Courier> response) {
+        Call<String> call = rtfBase.connect(credentials);
+        Intent intent = new Intent(this, CourierProfile.class);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
                 if(response.code() == 200)
                 {
                     //success
+                    Toast.makeText(MainActivity.this, "You have logged in successfully", Toast.LENGTH_LONG).show();
+                    // business.setToken(response.body());
+                    // intent.putExtra("token",response.body().toString()); //נשמור את הטוקן לאקטיביטי הבא
+                    startActivity(intent);
                 }
-                if(response.code() == 400)
+                if(response.code() == 400 || response.code() == 401)
                 {
                     //failure
+                    Toast.makeText(MainActivity.this, "log in failed-try again", Toast.LENGTH_LONG).show();
+
                 }
 
             }
 
             @Override
-            public void onFailure(Call<Courier> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Something went wrong" +t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
