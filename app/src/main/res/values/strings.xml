@@ -2,12 +2,12 @@
     <string name="app_name">courier-app</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="forgetPass"><u>Forgot password?</u></string>
+    <string name="forgetPass"><u>FORGOT PASSWORD?</u></string>
     <string name="newBusiness"><u>Create an account</u></string>
-    <string name="Connect">Sign in</string>
+    <string name="Connect">LOG IN</string>
     <string name="Email">Email</string>
     <string name="Password">Password</string>
-    <string name="newCourier">Create an account</string>
+    <string name="newCourier">New User? Register Now</string>
     <string name="FirstName">First Name</string>
     <string name="LastName">Last Name</string>
     <string name="PasswordEt">Password</string>
@@ -15,11 +15,9 @@
     <string name="Text">Create your account</string>
     <string name="Create">Create account</string>
     <string name="EmailEt">Email</string>
-    <string name="textViewDeliveryRequest"> Choose New Delivery</string>
-    <string name="textViewDeliveryHistory"> My Delivery History</string>
+
     <string name="textViewWelcom">hello (user name)</string>
-    <string name="textViewMyprofile"> My Profile</string>
-    <string name="textViewDeliveryList"> My Deliveries</string>
+
     <string name="PhoneMP">HERE WE NEED THE COURIER PHONE  FORM DB</string>
     <string name="textMP">HERE WE NEED THE COURIER FIRSTNAME AND LASTNAME FORM DB</string>
     <string name="EmailMP">HERE WE NEED THE COURIER EMAIL FORM DB</string>
@@ -27,7 +25,7 @@
     <string name="PassChangeMP">change password</string>
     <string name="ConfirmNewPassword">Confirm new password</string>
     <string name="NewPassword">Enter new password</string>
-    <string name="ConformPasswordChange">Save</string>
+    <string name="ConformPasswordChange">SAVE</string>
     <string name="PhoneEP">HERE WE NEED THE COURIER PHONE  FORM DB</string>
     <string name="LastNameEP">HERE WE NEED THE COURIER PHONE 2 FORM DB</string>
     <string name="textEP">Edit Profile</string>
