@@ -2,6 +2,7 @@ package com.project.courier_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +16,7 @@ import retrofit2.Response;
 
 public class RegisterNewCourier extends AppCompatActivity {
 
-    private EditText FirstName, LastName, PasswordEt, Phone, EmailEt;
+    private EditText PasswordEt, Phone2, Phone1, EmailEt, last, first,vehicle;
     private Button Create;
    private RetrofitInterface rtfBase;
 
@@ -24,21 +25,25 @@ public class RegisterNewCourier extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new_courier);
-        FirstName = (EditText)findViewById(R.id.FirstName);
-        PasswordEt = (EditText)findViewById(R.id.PasswordEt);
-        LastName = (EditText)findViewById(R.id.LastName);
-        Phone = (EditText)findViewById(R.id.Phone);
+        first = (EditText)findViewById(R.id.FirstName);
+        PasswordEt = (EditText)findViewById(R.id.passwordEt);
+        last = (EditText)findViewById(R.id.LastName);
+        Phone1 = (EditText)findViewById(R.id.Phone1);
+        Phone2 = (EditText)findViewById(R.id.phone2);
         Create=(Button)findViewById(R.id.Create);
         EmailEt = findViewById(R.id.EmailEt);
+        vehicle = findViewById(R.id.vehicle);
 
 
         Create.setOnClickListener((v) -> {
 
             String email = EmailEt.getText().toString();
             String password = PasswordEt.getText().toString();
-            String firstname = FirstName.getText().toString();
-            String phone = Phone.getText().toString();
-            String lastname = LastName.getText().toString();
+            String firstname = first.getText().toString();
+            String phone1 = Phone1.getText().toString();
+            String lastname = last.getText().toString();
+            String phone2 = Phone2.getText().toString();
+            String Vehicle = vehicle.getText().toString();
             rtfBase = RetrofitBase.getRetrofitInterface();
 
             //we need to check that the required fields are not empty
@@ -51,18 +56,21 @@ public class RegisterNewCourier extends AppCompatActivity {
                 return;
             }
             if(firstname.isEmpty()) {
-                FirstName.setError("This field is necessary");
+                first.setError("This field is necessary");
                 return;
             }
-            if(phone.isEmpty()) {
-                Phone.setError("This field is necessary");
+            if(phone1.isEmpty()) {
+                Phone1.setError("This field is necessary");
                 return;
             }
             if(lastname.isEmpty()) {
-                LastName.setError("This field is necessary");
+                last.setError("This field is necessary");
                 return;
             }
-
+            if(Vehicle.isEmpty()) {
+                vehicle.setError("This field is necessary");
+                return;
+            }
             //check whether the given email address is valid
             if(!validations.isValidEmail(email))
             {
@@ -76,39 +84,85 @@ public class RegisterNewCourier extends AppCompatActivity {
                 return;
             }
 
-            handleRegister(new Courier(email, phone, firstname, lastname, password));
+            Courier courier = phone2.isEmpty() ? new Courier(email, phone1,password,firstname,lastname, Vehicle)
+                    : new Courier(email, phone1,  phone2,password,firstname,lastname, Vehicle);
 
+            handleRegister(courier);
 
         });
     }
 
    private void handleRegister(Courier courier) {
 
-      HashMap<String, String> credentials = new HashMap<>();
 
-      credentials.put("FirstName",courier.getFirstName());
-       credentials.put("LastName",courier.getLastName());
-      credentials.put("email",courier.getEmail());
-      credentials.put("password", courier.getPassword());
-      credentials.put("phone", courier.getPhoneNumber());
-       Call<Void> call = rtfBase.register(credentials);
-
-        call.enqueue(new Callback<Void>() {
+       Call<String> call = rtfBase.register(courier); //we get id
+       call.enqueue(new Callback<String>() {
            @Override
-           public void onResponse(Call<Void> call, Response<Void> response) {
-               if (response.code() == 200)
-                   Toast.makeText(getApplicationContext(), "registered successfully", Toast.LENGTH_LONG).show();
+           public void onResponse(Call<String> call, Response<String> response) {
+               if(response.code() == 200)
+               {
+                   courier.setId(response.body());
+                   Toast.makeText(RegisterNewCourier.this, "registered successfully",Toast.LENGTH_LONG).show();
+                   connectToApp(courier);
 
-               if (response.code() == 400) {
-                   Toast.makeText(getApplicationContext(), "you already registered", Toast.LENGTH_LONG).show();
+
+               }
+               if(response.code() == 400)
+               {
+                   Toast.makeText(RegisterNewCourier.this, "you already registered",Toast.LENGTH_LONG).show();
+
+               }
+               if(response.code() == 404)
+               {
+                   Toast.makeText(RegisterNewCourier.this, "something wrong",Toast.LENGTH_LONG).show();
+
                }
            }
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-              Toast.makeText(RegisterNewCourier.this, t.getMessage(),Toast.LENGTH_LONG).show();
-          }
+
+           @Override
+           public void onFailure(Call<String> call, Throwable t) {
+               Toast.makeText(RegisterNewCourier.this, t.getMessage(),Toast.LENGTH_LONG).show();
+           }
        });
    }
+    private void connectToApp(Courier courier){
+        Intent intent = new Intent(this, CourierProfile.class);
 
+        HashMap<String, String> help = new HashMap<>();
+        help.put("email",courier.getEmail()) ;
+        help.put("password",courier.getPassword());
+        Call<String> call = rtfBase.connect(help); //we get token
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.code() == 200)
+                {
+                    courier.setToken(response.body());
+                    Toast.makeText(RegisterNewCourier.this, "successfully",Toast.LENGTH_LONG).show();
+                    // intent.putExtra("user",business);
+                    // System.out.println("--------------------"+business.getToken());
+                    startActivity(intent);
+
+                }
+                if(response.code() == 400)
+                {
+                    Toast.makeText(RegisterNewCourier.this, "we have a problem",Toast.LENGTH_LONG).show();
+
+                }
+                if(response.code() == 401)
+                {
+                    Toast.makeText(RegisterNewCourier.this, "Email or password invalid",Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(RegisterNewCourier.this, t.getMessage(),Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+    }
 }

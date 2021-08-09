@@ -8,6 +8,36 @@
     tools:context=".RegisterNewCourier">
 
     <EditText
+        android:id="@+id/phone2"
+        android:layout_width="352dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Phone2"
+        android:inputType="phone"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+    <EditText
+        android:id="@+id/passwordEt"
+        android:layout_width="352dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="@string/PasswordEt"
+        android:inputType="textPassword"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.662" />
+
+    <EditText
         android:id="@+id/FirstName"
         android:layout_width="352dp"
         android:layout_height="40dp"
@@ -39,22 +69,21 @@
         app:layout_constraintVertical_bias="0.253" />
 
     <EditText
-        android:id="@+id/PasswordEt"
+        android:id="@+id/vehicle"
         android:layout_width="352dp"
         android:layout_height="40dp"
         android:ems="10"
-        android:hint="@string/PasswordEt"
-        android:inputType="textPassword"
+        android:hint="vehicle"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.534" />
+        app:layout_constraintVertical_bias="0.593" />
 
     <EditText
-        android:id="@+id/Phone"
+        android:id="@+id/Phone1"
         android:layout_width="352dp"
         android:layout_height="40dp"
         android:ems="10"
@@ -91,9 +120,10 @@
         app:backgroundTint="#C9FDD835"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.83" />
 
     <EditText
         android:id="@+id/EmailEt"
