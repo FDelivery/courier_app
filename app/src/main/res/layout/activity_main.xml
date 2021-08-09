@@ -30,7 +30,6 @@
         android:drawableStart="@drawable/ic_baseline_mail_outline_24"
         android:drawablePadding="16dp"
         android:ems="14"
-
         android:hint="@string/Email"
         android:inputType="textEmailAddress"
         android:padding="16dp"
