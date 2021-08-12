@@ -1,12 +1,41 @@
 package com.project.courier_app;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.os.Bundle;
 
-public class Courier extends AppCompatActivity {
+public class Courier  {
 
-    private String email, primaryPhone ,secondaryPhone, password, firstName, lastName, id,token,vehicle,role = "COURIER";
+    private String email, primaryPhone ,secondaryPhone, password, firstName, lastName, id,token,vehicle;
+    private String role = "COURIER";
+
+    public String getPrimaryPhone() {
+        return primaryPhone;
+    }
+
+    public String getSecondaryPhone() {
+        return secondaryPhone;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public String getVehicle() {
+        return vehicle;
+    }
+
+    public String getRole() {
+        return role;
+    }
 
     public Courier(String email, String primaryPhone, String secondaryPhone, String password, String firstName, String lastName, String vehicle) {
         this.email = email;
@@ -24,6 +53,10 @@ public class Courier extends AppCompatActivity {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Courier(String email, String primaryPhone, String password, String firstName, String lastName, String vehicle) {
@@ -52,7 +85,6 @@ public class Courier extends AppCompatActivity {
     }
 
     public String getEmail() { return email; }
-    //In my opinion(sarah) you do not need it because in my opinion you should not allow the business / courier to change the email with which they registered
     public void setEmail(String email) { this.email = email; }
 
     public String getPassword() {

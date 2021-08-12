@@ -38,7 +38,8 @@
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.514" />
+        app:layout_constraintVertical_bias="0.514"
+        android:drawableLeft="@drawable/ic_baseline_mail_outline_24" />
 
     <EditText
         android:id="@+id/Password"
@@ -56,7 +57,8 @@
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Email"
-        app:layout_constraintVertical_bias="0.069" />
+        app:layout_constraintVertical_bias="0.069"
+        android:drawableLeft="@drawable/ic_baseline_lock_24" />
 
     <TextView
         android:id="@+id/forgotPass"
@@ -137,7 +139,8 @@
         android:layout_height="62dp"
         app:srcCompat="@drawable/deliveryman"
         tools:layout_editor_absoluteX="289dp"
-        tools:layout_editor_absoluteY="157dp" />
+        tools:layout_editor_absoluteY="157dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

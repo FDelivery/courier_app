@@ -8,7 +8,7 @@
     tools:context=".CourierProfile">
 
 
-    <EditText
+    <TextView
         android:id="@+id/PhoneMP"
         android:layout_width="352dp"
         android:layout_height="40dp"
@@ -32,10 +32,10 @@
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.324" />
+        app:layout_constraintVertical_bias="0.185" />
 
     <Button
         android:id="@+id/ChangeMP"
@@ -66,7 +66,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.049" />
 
-    <EditText
+    <TextView
         android:id="@+id/EmailMP"
         android:layout_width="352dp"
         android:layout_height="40dp"

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,9 +32,9 @@ public class RegisterNewCourier extends AppCompatActivity {
         Phone1 = (EditText)findViewById(R.id.Phone1);
         Phone2 = (EditText)findViewById(R.id.phone2);
         Create=(Button)findViewById(R.id.Create);
-        EmailEt = findViewById(R.id.EmailEt);
-        vehicle = findViewById(R.id.vehicle);
-
+        EmailEt = (EditText)findViewById(R.id.EmailEt);
+        vehicle = (EditText)findViewById(R.id.vehicle);
+        rtfBase=RetrofitBase.getRetrofitInterface();
 
         Create.setOnClickListener((v) -> {
 
@@ -44,7 +45,6 @@ public class RegisterNewCourier extends AppCompatActivity {
             String lastname = last.getText().toString();
             String phone2 = Phone2.getText().toString();
             String Vehicle = vehicle.getText().toString();
-            rtfBase = RetrofitBase.getRetrofitInterface();
 
             //we need to check that the required fields are not empty
             if(email.isEmpty()) {
@@ -68,7 +68,7 @@ public class RegisterNewCourier extends AppCompatActivity {
                 return;
             }
             if(Vehicle.isEmpty()) {
-                vehicle.setError("This field is necessary");
+                vehicle.setError("choose one from: BICYCLE , CAR ,  MOTORCYCLE");
                 return;
             }
             //check whether the given email address is valid
@@ -84,8 +84,9 @@ public class RegisterNewCourier extends AppCompatActivity {
                 return;
             }
 
-            Courier courier = phone2.isEmpty() ? new Courier(email, phone1,password,firstname,lastname, Vehicle)
-                    : new Courier(email, phone1,  phone2,password,firstname,lastname, Vehicle);
+            Courier courier = phone2.isEmpty() ? new Courier(email,phone1,password,firstname,lastname,Vehicle)
+                    : new Courier(email, phone1,phone2,password,firstname,lastname, Vehicle);
+           // Log.i("asd",courier.getEmail()+" "+courier.getPrimaryPhone()+" "+courier.getPassword()+" "+courier.getFirstName()+" "+courier.getLastName()+" "+courier.getVehicle());
 
             handleRegister(courier);
 
@@ -110,7 +111,6 @@ public class RegisterNewCourier extends AppCompatActivity {
                if(response.code() == 400)
                {
                    Toast.makeText(RegisterNewCourier.this, "you already registered",Toast.LENGTH_LONG).show();
-
                }
                if(response.code() == 404)
                {
@@ -127,23 +127,22 @@ public class RegisterNewCourier extends AppCompatActivity {
        });
    }
     private void connectToApp(Courier courier){
-        Intent intent = new Intent(this, CourierProfile.class);
 
         HashMap<String, String> help = new HashMap<>();
         help.put("email",courier.getEmail()) ;
         help.put("password",courier.getPassword());
-        Call<String> call = rtfBase.connect(help); //we get token
-        call.enqueue(new Callback<String>() {
+        Call<String[]> call = rtfBase.connect(help); //we get token and id
+        call.enqueue(new Callback<String[]>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<String[]> call, Response<String[]> response) {
                 if(response.code() == 200)
                 {
-                    courier.setToken(response.body());
-                    Toast.makeText(RegisterNewCourier.this, "successfully",Toast.LENGTH_LONG).show();
-                    // intent.putExtra("user",business);
-                    // System.out.println("--------------------"+business.getToken());
-                    startActivity(intent);
+                    assert response.body() != null;
+                    courier.setToken(response.body()[0]);
+                    courier.setId(response.body()[1]);
 
+                    Toast.makeText(RegisterNewCourier.this, "successfully",Toast.LENGTH_LONG).show();
+                    GetUser(courier.getId());
                 }
                 if(response.code() == 400)
                 {
@@ -158,11 +157,55 @@ public class RegisterNewCourier extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<String[]> call, Throwable t) {
                 Toast.makeText(RegisterNewCourier.this, t.getMessage(),Toast.LENGTH_LONG).show();
 
             }
         });
 
     }
+
+    // get- in id, return user
+    public void GetUser(String id) // need to know how to use in accepted user
+    {
+
+        Intent intent = new Intent(this, CourierMain.class);
+        Log.i(("vvv"),id);
+        Call<String> call = rtfBase.getUser(id);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response)
+            {
+
+                if(response.code() == 200)
+                {
+
+                    //success
+                   // Log.i("TEST123",response.body());
+                    intent.putExtra("CourierUserInGson",response.body());
+                    startActivity(intent);
+
+
+                }
+
+
+                if(response.code() == 400 || response.code()==500)
+                {
+                    //failure
+                    Toast.makeText(RegisterNewCourier.this, "this ID do not exist", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(RegisterNewCourier.this, "Something went wrong " +t.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
+    }
+
 }

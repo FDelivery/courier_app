@@ -9,12 +9,12 @@
 
 
     <EditText
-        android:id="@+id/LastNameEP"
+        android:id="@+id/Phone2EP"
         android:layout_width="352dp"
         android:layout_height="40dp"
         android:background="@drawable/round_border"
         android:ems="10"
-        android:hint="@string/LastNameEP"
+        android:hint=" Write your new secondary mobile here"
         android:inputType="phone"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="16dp"
@@ -32,7 +32,7 @@
         android:layout_height="40dp"
         android:background="@drawable/round_border"
         android:ems="10"
-        android:hint="@string/PhoneEP"
+        android:hint=" Write your new primary mobile here"
         android:inputType="phone"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="16dp"
@@ -60,7 +60,7 @@
         app:layout_constraintVertical_bias="0.185" />
 
     <Button
-        android:id="@+id/ChangeEP"
+        android:id="@+id/save"
         android:layout_width="352dp"
         android:layout_height="40dp"
         android:background="@drawable/round_buttom"
@@ -80,7 +80,7 @@
         android:layout_height="40dp"
         android:background="@drawable/round_border"
         android:ems="10"
-        android:hint="@string/EmailEP"
+        android:hint=" Write your new email here"
         android:inputType="textEmailAddress"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="16dp"
@@ -97,7 +97,7 @@
         android:layout_height="40dp"
         android:background="@drawable/round_border"
         android:ems="10"
-        android:hint="@string/FirstNameEP"
+        android:hint=" Write your first name here"
         android:inputType="textEmailAddress"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="16sp"
@@ -114,7 +114,8 @@
         android:layout_height="100dp"
         app:srcCompat="@drawable/deliverymanpurpol"
         tools:layout_editor_absoluteX="259dp"
-        tools:layout_editor_absoluteY="615dp" />
+        tools:layout_editor_absoluteY="615dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
