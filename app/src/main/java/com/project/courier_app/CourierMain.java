@@ -2,10 +2,12 @@ package com.project.courier_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -19,14 +21,16 @@ public class CourierMain extends AppCompatActivity {
     private ImageButton chooseDelivery;
     private ImageButton deliveryList;
     private ImageButton myprofile;
+    private TextView welcome;
     private RetrofitInterface rtfBase;
-
+    Courier courier;
     String FromIntent,ID;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courier_main);
-
+        welcome=(TextView)findViewById(R.id.textViewWelcom);
         deliveryHistory=(ImageButton)findViewById(R.id.deliveryHistory);
         chooseDelivery=(ImageButton)findViewById(R.id.chooseDelivery);
         deliveryList=(ImageButton)findViewById(R.id.deliveryList);
@@ -39,7 +43,9 @@ public class CourierMain extends AppCompatActivity {
         if(extras!=null)
         {
             FromIntent = extras.getString("CourierUserInGson");
+            courier=new Gson().fromJson(FromIntent, Courier.class);
             ID =extras.getString("id");
+            welcome.setText("welcome "+courier.getFirstName()+" "+courier.getLastName());
 
         }
 
