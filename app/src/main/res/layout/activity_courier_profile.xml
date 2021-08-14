@@ -17,11 +17,12 @@
         android:ems="10"
         android:hint="@string/PhoneMP"
         android:inputType="phone"
+        android:padding="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.728"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.457" />
@@ -69,7 +70,7 @@
         app:layout_constraintHorizontal_bias="0.829"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.954" />
+        app:layout_constraintVertical_bias="0.955" />
 
     <TextView
         android:id="@+id/EmailMP"
@@ -80,12 +81,12 @@
         android:ems="10"
         android:hint="@string/EmailMP"
         android:inputType="textEmailAddress"
-        android:paddingRight="16dp"
+        android:padding="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.728"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.369" />
