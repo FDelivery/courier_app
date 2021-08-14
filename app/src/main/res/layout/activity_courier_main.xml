@@ -10,8 +10,8 @@
 
     <ImageButton
         android:id="@+id/deliveryList"
-        android:layout_width="184dp"
-        android:layout_height="266dp"
+        android:layout_width="177dp"
+        android:layout_height="226dp"
         android:layout_marginBottom="14dp"
         android:background="@drawable/border"
         android:foreground="@drawable/bikeicon"
@@ -21,28 +21,27 @@
         app:layout_constraintHorizontal_bias="0.089"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243" />
-
+        app:layout_constraintVertical_bias="0.309" />
 
     <ImageButton
         android:id="@+id/myprofile"
-        android:layout_width="184dp"
-        android:layout_height="266dp"
+        android:layout_width="177dp"
+        android:layout_height="226dp"
         android:layout_marginBottom="14dp"
         android:background="@drawable/border"
         android:foreground="@drawable/myprofile"
         android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.929"
+        app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243" />
+        app:layout_constraintVertical_bias="0.309" />
 
     <ImageButton
         android:id="@+id/deliveryHistory"
-        android:layout_width="184dp"
-        android:layout_height="266dp"
+        android:layout_width="177dp"
+        android:layout_height="226dp"
         android:background="@drawable/border"
         android:foreground="@drawable/schesuale"
         android:foregroundGravity="center"
@@ -55,8 +54,8 @@
 
     <ImageButton
         android:id="@+id/chooseDelivery"
-        android:layout_width="184dp"
-        android:layout_height="266dp"
+        android:layout_width="177dp"
+        android:layout_height="226dp"
         android:background="@drawable/border"
         android:foreground="@drawable/towboxicon"
         android:foregroundGravity="center"
@@ -78,10 +77,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.62"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044" />
+        app:layout_constraintVertical_bias="0.084" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

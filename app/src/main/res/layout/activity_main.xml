@@ -28,18 +28,19 @@
         android:layout_height="wrap_content"
         android:background="@drawable/round_border"
         android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+        android:drawableLeft="@drawable/ic_baseline_mail_outline_24"
         android:drawablePadding="16dp"
         android:ems="14"
         android:hint="@string/Email"
         android:inputType="textEmailAddress"
         android:padding="16dp"
+        android:textColor="#040404"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.514"
-        android:drawableLeft="@drawable/ic_baseline_mail_outline_24" />
+        app:layout_constraintVertical_bias="0.514" />
 
     <EditText
         android:id="@+id/Password"
@@ -47,18 +48,19 @@
         android:layout_height="wrap_content"
         android:background="@drawable/round_border"
         android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:drawableLeft="@drawable/ic_baseline_lock_24"
         android:drawablePadding="16dp"
         android:ems="14"
         android:hint="@string/Password"
         android:inputType="textPassword"
         android:padding="16dp"
+        android:textColor="#040404"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Email"
-        app:layout_constraintVertical_bias="0.069"
-        android:drawableLeft="@drawable/ic_baseline_lock_24" />
+        app:layout_constraintVertical_bias="0.069" />
 
     <TextView
         android:id="@+id/forgotPass"

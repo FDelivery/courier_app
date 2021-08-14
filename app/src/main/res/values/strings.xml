@@ -12,26 +12,27 @@
     <string name="LastName">Last Name</string>
     <string name="PasswordEt">Password</string>
     <string name="Phone">Phone number</string>
-    <string name="Text">Create your account</string>
+    <string name="Text">NEW USER</string>
     <string name="Create">Create account</string>
     <string name="EmailEt">Email</string>
 
     <string name="textViewWelcom">hello (user name)</string>
 
-    <string name="PhoneMP">HERE WE NEED THE COURIER PHONE  FORM DB</string>
-    <string name="textMP">HERE WE NEED THE COURIER FIRSTNAME AND LASTNAME FORM DB</string>
-    <string name="EmailMP">HERE WE NEED THE COURIER EMAIL FORM DB</string>
-    <string name="ChangeMP">Edit</string>
-    <string name="PassChangeMP">change password</string>
+    <string name="PhoneMP">0524338245</string>
+    <string name="textMP">sarah hananayev</string>
+    <string name="EmailMP">sarahhananayev@gmail.com</string>
+    <string name="ChangeMP">EDIT</string>
+    <string name="PassChangeMP">CHANGE PASSWORD</string>
     <string name="ConfirmNewPassword">Confirm new password</string>
     <string name="NewPassword">Enter new password</string>
     <string name="ConformPasswordChange">SAVE</string>
     <string name="PhoneEP">HERE WE NEED THE COURIER PHONE  FORM DB</string>
-    <string name="LastNameEP">HERE WE NEED THE COURIER PHONE 2 FORM DB</string>
+    <string name="Phone2EP">HERE WE NEED THE COURIER PHONE 2 FORM DB</string>
     <string name="textEP">Edit Profile</string>
     <string name="EmailEP">HERE WE NEED THE COURIERS EMAIL FORM DB</string>
     <string name="ChangeEP">Save</string>
-    <string name="FirstNameEP">HERE WE NEED THE COURIER NAME FORM DB</string>
+    <string name="FirstNameEP">HERE WE NEED THE COURIER FFIRST NAME FORM DB</string>
+    <string name="LastNameEP">HERE WE NEED THE COURIER LAST NAME FORM DB</string>
 
 
 </resources>

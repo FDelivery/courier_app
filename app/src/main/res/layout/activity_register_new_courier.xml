@@ -4,95 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+   android:background="@drawable/tringle"
     tools:context=".RegisterNewCourier">
 
     <EditText
         android:id="@+id/phone2"
+        style="@style/Widget.AppCompat.TextView.SpinnerItem"
         android:layout_width="352dp"
         android:layout_height="40dp"
-        android:ems="10"
+        android:background="@drawable/round_border"
+        android:ems="14"
         android:hint="Phone2"
         android:inputType="phone"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#040404"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.519" />
 
     <EditText
         android:id="@+id/passwordEt"
+        style="@style/Widget.AppCompat.TextView.SpinnerItem"
         android:layout_width="352dp"
         android:layout_height="40dp"
-        android:ems="10"
+        android:background="@drawable/round_border"
+        android:ems="14"
         android:hint="@string/PasswordEt"
         android:inputType="textPassword"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#040404"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.662" />
+        app:layout_constraintVertical_bias="0.7" />
+
 
     <EditText
         android:id="@+id/FirstName"
+        style="@style/Widget.AppCompat.TextView.SpinnerItem"
+
         android:layout_width="352dp"
         android:layout_height="40dp"
-        android:ems="10"
+        android:background="@drawable/round_border"
+        android:ems="14"
         android:hint="@string/FirstName"
         android:inputType="textPersonName"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#040404"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.168" />
-
+        app:layout_constraintVertical_bias="0.166" />
 
     <EditText
         android:id="@+id/LastName"
+        style="@style/Widget.AppCompat.TextView.SpinnerItem"
         android:layout_width="352dp"
         android:layout_height="40dp"
-        android:ems="10"
+        android:background="@drawable/round_border"
+        android:ems="14"
         android:hint="@string/LastName"
         android:inputType="textPersonName"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#040404"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.253" />
 
     <EditText
         android:id="@+id/vehicle"
+        style="@style/Widget.AppCompat.TextView.SpinnerItem"
         android:layout_width="352dp"
         android:layout_height="40dp"
-        android:ems="10"
+        android:background="@drawable/round_border"
+        android:ems="14"
         android:hint="vehicle"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#040404"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.593" />
+        app:layout_constraintVertical_bias="0.609" />
 
     <EditText
         android:id="@+id/Phone1"
+        style="@style/Widget.AppCompat.TextView.SpinnerItem"
         android:layout_width="352dp"
         android:layout_height="40dp"
-        android:ems="10"
+        android:background="@drawable/round_border"
+        android:ems="14"
         android:hint="@string/Phone"
         android:inputType="phone"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#040404"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.429" />
@@ -103,41 +128,48 @@
         android:layout_height="56dp"
         android:text="@string/Text"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="22sp"
+        android:textColor="#de95e1"
+        android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.042" />
 
     <Button
         android:id="@+id/Create"
         android:layout_width="239dp"
         android:layout_height="54dp"
+        android:background="@drawable/round_buttom"
         android:text="@string/Create"
-        android:textColor="#070707"
-        app:backgroundTint="#C9FDD835"
+        android:textColor="#ffffff"
+        app:backgroundTint="c956ce"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.83" />
+        app:layout_constraintVertical_bias="0.828" />
 
     <EditText
         android:id="@+id/EmailEt"
+        style="@style/Widget.AppCompat.TextView.SpinnerItem"
         android:layout_width="352dp"
         android:layout_height="40dp"
-        android:ems="10"
+        android:background="@drawable/round_border"
+        android:ems="14"
         android:hint="@string/EmailEt"
         android:inputType="textEmailAddress"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#040404"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.334" />
+        app:layout_constraintVertical_bias="0.34" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
