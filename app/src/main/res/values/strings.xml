@@ -12,20 +12,25 @@
     <string name="textViewWelcom">hello (user name)</string>
 
     <!-- activity courier profile. -->
-    <string name="PhoneMP">0524338245</string>
-    <string name="textMP">sarah hananayev</string>
-    <string name="EmailMP">sarahhananayev@gmail.com</string>
+    <string name="PhoneMP">phone FROM DB </string>
+    <string name="textMP">courier name FROM DB </string>
+    <string name="EmailMP"> mail FROM DB </string>
     <string name="ChangeMP">EDIT</string>
     <string name="PassChangeMP">CHANGE PASSWORD</string>
+    <string name="vehicleMP">vehicle :bike car or bicycle FROM DB </string>
+    <string name="Phone2MP">additional phone number</string>
 
     <!-- activity edit my profile. -->
-    <string name="PhoneEP">HERE WE NEED THE COURIER PHONE  FORM DB</string>
-    <string name="Phone2EP">HERE WE NEED THE COURIER PHONE 2 FORM DB</string>
-    <string name="FirstNameEP">HERE WE NEED THE COURIER FFIRST NAME FORM DB</string>
-    <string name="LastNameEP">HERE WE NEED THE COURIER LAST NAME FORM DB</string>
-    <string name="EmailEP">HERE WE NEED THE COURIERS EMAIL FORM DB</string>
+    <string name="PhoneEP">new phone number</string>
+    <string name="Phone2EP">new additional phone number</string>
+    <string name="FirstNameEP">new first name</string>
+    <string name="LastNameEP">new last name</string>
+    <string name="EmailEP">new email address</string>
     <string name="ChangeEP">SAVE</string>
     <string name="textEP">Edit Profile</string>
+    <string name="vehicleEP">vehicle :bike car or bicycle </string>
+
+
 
     <!-- activity main. -->
     <string name="forgetPass"><u>FORGOT PASSWORD?</u></string>
@@ -39,11 +44,19 @@
     <string name="FirstName">First Name</string>
     <string name="LastName">Last Name</string>
     <string name="PasswordEt">Password</string>
-    <string name="Phone">Phone number</string>
+    <string name="Phone1">Phone number</string>
+    <string name="Phone2">Additional phone number</string>
     <string name="Text">NEW USER</string>
     <string name="Create">CREATE ACCOUNT</string>
+    <string name="vehicle">vehicle :bike car or bicycle </string>
     <string name="EmailEt">Email</string>
+    <string name="enter_bank">bank details</string>
 
+
+
+    <!-- activity  bank detailes -->
+    <string name="bank">Enter bank details </string>
+    <string name="messege">This information is stored for reuse</string>
 
 
 
