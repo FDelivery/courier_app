@@ -146,15 +146,15 @@
 
     <Button
         android:id="@+id/Create"
-        android:layout_width="239dp"
-        android:layout_height="54dp"
+        android:layout_width="352dp"
+        android:layout_height="40dp"
         android:background="@drawable/round_buttom"
         android:text="@string/Create"
         android:textColor="#ffffff"
         app:backgroundTint="c956ce"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.828" />
