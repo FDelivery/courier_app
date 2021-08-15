@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 public class Courier  {
 
-    private String email, primaryPhone ,secondaryPhone, password, firstName, lastName, id,token,vehicle;
+    private String email, primaryPhone ,secondaryPhone, password, firstName, lastName, id,token,vehicle,currentDelivery;
     private String role = "COURIER";
 
     public String getPrimaryPhone() {

@@ -1,15 +1,50 @@
 package com.project.courier_app;
 // noting changed, completely copied from Business app
-public class Delivery {
 
-    private String clientAddress, clientPhone, clientName, Note, time, date;
-    public Delivery(String clientAddress, String clientPhone, String clientName, String clientNote, String time, String date) {
-        this.clientAddress = clientAddress;
+public class Delivery
+{
+
+    private Address destAddress;
+    private String clientPhone;
+    private String clientName;
+    private String Note;
+    private String Time;
+    private String deliveredDate;
+    private String pickedDate;
+    private double price;
+    private String status;
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    private String id;
+
+    @Override
+    public String toString() {
+        return  " client name: "+clientName+ "\n client phone: "+clientPhone+"\n ADDRESS- city:"+destAddress.getCity()+
+                "\n apartment: "+destAddress.getApartment()+"\n number: "+destAddress.getNumber()+"\n price: "+price+ "\n note: "+Note;
+    }
+
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    public Delivery(Address clientAddress, String clientPhone, String clientName, String clientNote, String time, String date,String status) {
+        this.destAddress= clientAddress;
         this.clientName = clientName;
         this.clientPhone = clientPhone;
-        this.time = time;
+        this.Time = time;
         this.Note = clientNote;
-        this.date = date;
+        this.deliveredDate = date;
+        this.status=status;
     }
 
     public String getClientPhone() {
@@ -20,8 +55,8 @@ public class Delivery {
         this.clientPhone = clientPhone;
     }
 
-    public String getClientAddress() {
-        return clientAddress;
+    public Address getClientAddress() {
+        return destAddress;
     }
 
     public String getClientName() {
@@ -33,19 +68,19 @@ public class Delivery {
     }
 
     public String getDate() {
-        return date;
+        return deliveredDate;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.deliveredDate = date;
     }
 
     public String getTime() {
-        return time;
+        return Time;
     }
 
     public void setTime(String time) {
-        this.time = time;
+        this.Time = time;
     }
 
     public String getNote() {
@@ -56,8 +91,8 @@ public class Delivery {
         Note = note;
     }
 
-    public void setClientAddress(String clientAddress) {
-        this.clientAddress = clientAddress;
+    public void setClientAddress(Address clientAddress) {
+        this.destAddress = clientAddress;
     }
 }
 

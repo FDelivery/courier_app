@@ -184,6 +184,7 @@ public class RegisterNewCourier extends AppCompatActivity {
                     //success
                    // Log.i("TEST123",response.body());
                     intent.putExtra("CourierUserInGson",response.body());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
 

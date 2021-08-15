@@ -24,7 +24,7 @@ public class CourierMain extends AppCompatActivity {
     private TextView welcome;
     private RetrofitInterface rtfBase;
     Courier courier;
-    String FromIntent,ID;
+    String FromIntent,ID,TOKEN;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +45,18 @@ public class CourierMain extends AppCompatActivity {
             FromIntent = extras.getString("CourierUserInGson");
             courier=new Gson().fromJson(FromIntent, Courier.class);
             ID =extras.getString("id");
+            TOKEN=extras.getString(("token"));
             welcome.setText("welcome "+courier.getFirstName()+" "+courier.getLastName());
+            Log.i("11111",TOKEN);
 
         }
 
 
         deliveryList.setOnClickListener((v) -> {
-            startActivity(new Intent(this, DeliveryTable.class));
+Intent intent= new Intent(this, DeliveryTable.class);
+            intent.putExtra("token",TOKEN);
+Log.i("222222",TOKEN);
+            startActivity(intent);
         });
 
         myprofile.setOnClickListener((v) -> {
@@ -67,7 +72,14 @@ public class CourierMain extends AppCompatActivity {
         });
 
         chooseDelivery.setOnClickListener((v) -> {
-            startActivity(new Intent(this, ChooseDelivery.class));
+
+            Intent intent =new Intent(this, ChooseDelivery.class);
+            Log.i("11111",TOKEN);
+            intent.putExtra("token",TOKEN);
+Log.i("abcd",TOKEN);
+            intent.putExtra("CourierUserInGson",FromIntent);
+            intent.putExtra("id",ID);
+            startActivity(intent);
         });
     }
 

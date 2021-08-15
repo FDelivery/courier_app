@@ -151,7 +151,7 @@
         android:background="@drawable/round_buttom"
         android:text="@string/Create"
         android:textColor="#ffffff"
-        app:backgroundTint="c956ce"
+        app:backgroundTint="#c956ce"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView ForgotPassword;
     private TextView newCourier;
     private RetrofitInterface rtfBase;
-
+private String TOKEN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
         newCourier.setOnClickListener((v) -> {
-            startActivity(new Intent(this, RegisterNewCourier.class));
+           Intent intent= new Intent(this, RegisterNewCourier.class);
+            startActivity(intent);
         });
 
 
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     String[] arr = new String[2];
                     arr=response.body();
                    // Log.i("trew",arr[1]);
+                    TOKEN=arr[0];
                     GetUser(arr[1]);
 
                 }
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     {
 
         Intent intent = new Intent(this, CourierMain.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         Call<String> call = rtfBase.getUser(id);
 
@@ -117,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
                     //success
                     intent.putExtra("CourierUserInGson",response.body());
                     intent.putExtra("id",id);
+                    intent.putExtra("token",TOKEN);
+
                     startActivity(intent);
                 }
 

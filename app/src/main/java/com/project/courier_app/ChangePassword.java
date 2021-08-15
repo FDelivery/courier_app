@@ -38,11 +38,12 @@ public class ChangePassword extends AppCompatActivity {
 
 
         ConformPasswordChange.setOnClickListener((v) -> {
-            updateUser(FromIntent);
+            ///updateUser(FromIntent);
 
         });
     }
 
+/*
 
     private void updateUser(String id)
     {
@@ -93,6 +94,7 @@ public class ChangePassword extends AppCompatActivity {
 
 
     }
+*/
 
 
     // get- in id, return user
