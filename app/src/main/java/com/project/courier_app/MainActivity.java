@@ -20,11 +20,11 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     private EditText EmailEt;
     private EditText PasswordEt;
-    private Button Connect;
+    private Button logIn;
     private TextView ForgotPassword;
-    private TextView newCourier;
+    private TextView createNewCourier;
     private RetrofitInterface rtfBase;
-private String TOKEN;
+    private String TOKEN,ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +35,11 @@ private String TOKEN;
         rtfBase = RetrofitBase.getRetrofitInterface();
         EmailEt = (EditText)findViewById(R.id.Email);
         PasswordEt = (EditText)findViewById(R.id.Password);
-        Connect=(Button)findViewById(R.id.Connect);
+        logIn=(Button)findViewById(R.id.Connect);
         ForgotPassword = findViewById(R.id.forgotPass);
-        newCourier = findViewById(R.id.newCourier);
+        createNewCourier = findViewById(R.id.newCourier);
 
-        Connect.setOnClickListener((v) -> {
+        logIn.setOnClickListener((v) -> {
             if(EmailEt.getText().toString().isEmpty())
             {
                 EmailEt.setError("This field is necessary");
@@ -53,9 +53,10 @@ private String TOKEN;
             handleConnect();
         });
         ForgotPassword.setOnClickListener((v)->{
+           // Intent intent= new Intent(this, ChangePassword.class); ///לעבור לאקטיביטי של שכחתי סיסמה
 
         });
-        newCourier.setOnClickListener((v) -> {
+        createNewCourier.setOnClickListener((v) -> {
            Intent intent= new Intent(this, RegisterNewCourier.class);
             startActivity(intent);
         });
@@ -77,11 +78,11 @@ private String TOKEN;
                 {
                     //success
                     Toast.makeText(MainActivity.this, "You have logged in successfully", Toast.LENGTH_LONG).show();
-                    String[] arr = new String[2];
-                    arr=response.body();
-                   // Log.i("trew",arr[1]);
-                    TOKEN=arr[0];
-                    GetUser(arr[1]);
+                    String[] tokenAndID = new String[2];
+                    tokenAndID=response.body();
+                    TOKEN=tokenAndID[0];
+                    ID=tokenAndID[1];
+                    GetUser(ID);
 
                 }
                 if(response.code() == 400 || response.code() == 401)
@@ -132,6 +133,7 @@ private String TOKEN;
                     Toast.makeText(MainActivity.this, "this ID do not exist", Toast.LENGTH_LONG).show();
 
                 }
+
             }
 
             @Override

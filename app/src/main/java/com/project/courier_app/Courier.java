@@ -13,6 +13,14 @@ public class Courier  {
         return primaryPhone;
     }
 
+    public String getCurrentDelivery() {
+        return currentDelivery;
+    }
+
+    public void setCurrentDelivery(String currentDelivery) {
+        this.currentDelivery = currentDelivery;
+    }
+
     public String getSecondaryPhone() {
         return secondaryPhone;
     }
@@ -45,6 +53,7 @@ public class Courier  {
         this.firstName = firstName;
         this.lastName = lastName;
         this.vehicle = vehicle;
+        this.currentDelivery="None";
     }
 
     public void setId(String id) {
@@ -66,6 +75,8 @@ public class Courier  {
         this.firstName = firstName;
         this.lastName = lastName;
         this.vehicle = vehicle;
+        this.currentDelivery="None";
+
     }
 
     public void setPrimaryPhone(String primaryPhone) {

@@ -45,6 +45,7 @@ public class Delivery
         this.Note = clientNote;
         this.deliveredDate = date;
         this.status=status;
+
     }
 
     public String getClientPhone() {

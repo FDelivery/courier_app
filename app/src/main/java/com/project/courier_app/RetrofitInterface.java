@@ -30,7 +30,7 @@ public interface RetrofitInterface
 
     /////////////////////////////////////////////////////////////////////////////////
 
-    @PUT("/api/v1/deliveriesRef/{delivery_id}/") //return void -- update status                       להוסיף בשרת
+    @PUT("/api/v1/deliveriesRef/{delivery_id}/") //return void -- update status
     Call<Void> registerDelivery(@Header("Authorization") String token,@Path("delivery_id") String id, @Query("status") String status);
 
     @GET("/api/v1/deliveriesRef/") ////return gson string (Delivery)

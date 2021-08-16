@@ -23,7 +23,7 @@ import retrofit2.Response;
 public class ChooseDelivery extends AppCompatActivity {
     private ListView listView;
     private RetrofitInterface  rtfBase = RetrofitBase.getRetrofitInterface();
-    String FromIntent,ID,TOKEN;
+    String CourierUser,ID,TOKEN,deliveryID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +36,11 @@ public class ChooseDelivery extends AppCompatActivity {
 
         if(extras!=null)
         {
-            FromIntent = extras.getString("CourierUserInGson");
+            CourierUser = extras.getString("CourierUserInGson");
             ID =extras.getString("id");
-                TOKEN=extras.getString("token");
-            courier = new Gson().fromJson(FromIntent, Courier.class);
-            // Log.i("ttt", businessUser.getFirstName());
+            TOKEN=extras.getString("token");
+            courier = new Gson().fromJson(CourierUser, Courier.class);
+
 
 
             GetDeliveries();
@@ -51,7 +51,7 @@ public class ChooseDelivery extends AppCompatActivity {
     }
 
 
-    private void GetDeliveries() //this give us all deliveries
+    private void GetDeliveries() //this give us all deliveries with status "COURIER_SEARCHING"
     {
         Call<List<String>> call = rtfBase.getDeliveries("COURIER_SEARCHING");
         ArrayList<String> arrayList=new ArrayList<>();
@@ -67,17 +67,16 @@ public class ChooseDelivery extends AppCompatActivity {
                 }
                 if(response.code() == 200)
                 {
-                    Log.i("TEST1", String.valueOf(response.body()));
+
                     for(int i=0;i<response.body().size();i++) {
-                        String deliveryID=response.body().get(i).substring(18,42);
-                        Log.i("TEST6", deliveryID);
+                        deliveryID=response.body().get(i).substring(18,42);
 
                         Delivery delivery = new Gson().fromJson(response.body().get(i), Delivery.class);
                         delivery.setId(deliveryID);
-                        arrayList.add(deliveryID);
-                        help(arrayList);
-                    }
+                        arrayList.add(delivery.getClientName()+" "+delivery.getClientPhone()+"                                     id="+deliveryID);
 
+                    }
+                    help(arrayList);
                 }
             }
 
@@ -96,8 +95,8 @@ public class ChooseDelivery extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Log.i("whatt",arrayList.get(position));
-                GetDelivery(arrayList.get(position));
+                GetDelivery(arrayList.get(position).split("id=")[1]);
+
 
 
 
@@ -107,7 +106,7 @@ public class ChooseDelivery extends AppCompatActivity {
     private void GetDelivery(String idDelivery) //put delivery id and this return you the delivery
     {
         Call<String> call = rtfBase.getDelivery(idDelivery);
-        Intent intent=new Intent(this,DeliveryTable.class);
+        Intent intent=new Intent(this, showChoosenDelivery.class);
 
         call.enqueue(new Callback<String>() {
             @Override
@@ -121,16 +120,13 @@ public class ChooseDelivery extends AppCompatActivity {
                 }
                 if(response.code() == 200)
                 {
-                    Log.i("TEST1",response.body());
-                    Delivery GSON = new Gson().fromJson(response.body(),Delivery.class);
-                    Log.i("TEST2",GSON.getClientName());
-                    Toast.makeText(ChooseDelivery.this, "We found your Delivery",Toast.LENGTH_LONG).show();
-                    intent.putExtra("token",TOKEN);
 
+                    Delivery GSON = new Gson().fromJson(response.body(),Delivery.class);
+                    intent.putExtra("token",TOKEN);
                     intent.putExtra("delivery",response.body());
                     intent.putExtra("idDelivery",idDelivery);
                     intent.putExtra("id",ID);
-                    intent.putExtra("CourierUserInGson",FromIntent);
+                    intent.putExtra("CourierUserInGson",CourierUser);
 
                     startActivity(intent);
 

@@ -17,34 +17,40 @@ import retrofit2.Response;
 
 public class RegisterNewCourier extends AppCompatActivity {
 
-    private EditText PasswordEt, Phone2, Phone1, EmailEt, last, first,vehicle;
-    private Button Create;
+    private EditText PasswordEt, Phone2, Phone1, EmailEt, Last, First,Vehicle;
+    private Button Create,payPage;
    private RetrofitInterface rtfBase;
-
+    private String ID,TOKEN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new_courier);
-        first = (EditText)findViewById(R.id.FirstName);
+        First = (EditText)findViewById(R.id.FirstName);
         PasswordEt = (EditText)findViewById(R.id.passwordEt);
-        last = (EditText)findViewById(R.id.LastName);
+        Last = (EditText)findViewById(R.id.LastName);
         Phone1 = (EditText)findViewById(R.id.Phone1);
         Phone2 = (EditText)findViewById(R.id.phone2);
         Create=(Button)findViewById(R.id.Create);
+        payPage=(Button)findViewById(R.id.enter_bank);
         EmailEt = (EditText)findViewById(R.id.EmailEt);
-        vehicle = (EditText)findViewById(R.id.vehicle);
+        Vehicle = (EditText)findViewById(R.id.vehicle);
         rtfBase=RetrofitBase.getRetrofitInterface();
 
+
+        payPage.setOnClickListener( (v) -> {
+           // Intent intent = new Intent(this, CourierMain.class);    //לשים נתיב לדף תשלום
+           // startActivity(intent);
+        });
         Create.setOnClickListener((v) -> {
 
             String email = EmailEt.getText().toString();
             String password = PasswordEt.getText().toString();
-            String firstname = first.getText().toString();
+            String firstname = First.getText().toString();
             String phone1 = Phone1.getText().toString();
-            String lastname = last.getText().toString();
+            String lastname = Last.getText().toString();
             String phone2 = Phone2.getText().toString();
-            String Vehicle = vehicle.getText().toString();
+            String vehicle = Vehicle.getText().toString();
 
             //we need to check that the required fields are not empty
             if(email.isEmpty()) {
@@ -56,7 +62,7 @@ public class RegisterNewCourier extends AppCompatActivity {
                 return;
             }
             if(firstname.isEmpty()) {
-                first.setError("This field is necessary");
+                First.setError("This field is necessary");
                 return;
             }
             if(phone1.isEmpty()) {
@@ -64,11 +70,21 @@ public class RegisterNewCourier extends AppCompatActivity {
                 return;
             }
             if(lastname.isEmpty()) {
-                last.setError("This field is necessary");
+                Last.setError("This field is necessary");
                 return;
             }
-            if(Vehicle.isEmpty()) {
-                vehicle.setError("choose one from: BICYCLE , CAR ,  MOTORCYCLE");
+            if(vehicle.isEmpty()) {
+                Vehicle.setError("choose one from: Bicycle , car ,  motorcycle");
+                return;
+            }
+            else if(vehicle.equals("car") || vehicle.equals("Car") || vehicle.equals("CAR")){
+                vehicle="CAR";
+            }else if(vehicle.equals("Bicycle") || vehicle.equals("BICYCLE") || vehicle.equals("bicycle") || vehicle.equals("bicycl") || vehicle.equals("bcycle")){
+                vehicle="BICYCLE";
+            }else if(vehicle.equals("MOTORcycle") || vehicle.equals("MOTORCYCLE") || vehicle.equals("motorcycle") || vehicle.equals("Motorcycle") || vehicle.equals("motocycle")){
+            vehicle="MOTORCYCLE";
+        }else{
+                Vehicle.setError("choose one from: Bicycle , car ,  motorcycle");
                 return;
             }
             //check whether the given email address is valid
@@ -84,9 +100,8 @@ public class RegisterNewCourier extends AppCompatActivity {
                 return;
             }
 
-            Courier courier = phone2.isEmpty() ? new Courier(email,phone1,password,firstname,lastname,Vehicle)
-                    : new Courier(email, phone1,phone2,password,firstname,lastname, Vehicle);
-           // Log.i("asd",courier.getEmail()+" "+courier.getPrimaryPhone()+" "+courier.getPassword()+" "+courier.getFirstName()+" "+courier.getLastName()+" "+courier.getVehicle());
+            Courier courier = phone2.isEmpty() ? new Courier(email,phone1,password,firstname,lastname,vehicle)
+                    : new Courier(email, phone1,phone2,password,firstname,lastname, vehicle);
 
             handleRegister(courier);
 
@@ -140,9 +155,11 @@ public class RegisterNewCourier extends AppCompatActivity {
                     assert response.body() != null;
                     courier.setToken(response.body()[0]);
                     courier.setId(response.body()[1]);
+                    ID=response.body()[1];
+                    TOKEN=response.body()[0];
 
                     Toast.makeText(RegisterNewCourier.this, "successfully",Toast.LENGTH_LONG).show();
-                    GetUser(courier.getId());
+                    GetUser(ID);
                 }
                 if(response.code() == 400)
                 {
@@ -170,7 +187,6 @@ public class RegisterNewCourier extends AppCompatActivity {
     {
 
         Intent intent = new Intent(this, CourierMain.class);
-        Log.i(("vvv"),id);
         Call<String> call = rtfBase.getUser(id);
 
         call.enqueue(new Callback<String>() {
@@ -182,8 +198,9 @@ public class RegisterNewCourier extends AppCompatActivity {
                 {
 
                     //success
-                   // Log.i("TEST123",response.body());
                     intent.putExtra("CourierUserInGson",response.body());
+                    intent.putExtra("id",id);
+                    intent.putExtra("token",TOKEN);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 

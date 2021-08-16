@@ -15,7 +15,7 @@
         <activity android:name=".ChooseDelivery" />
         <activity android:name=".CourierProfile" />
         <activity android:name=".RegisterNewCourier" />
-        <activity android:name=".DeliveryTable" />
+        <activity android:name=".showChoosenDelivery" />
         <activity android:name=".DeliveryHistory" />
         <activity android:name=".CourierMain" />
         <activity android:name=".MainActivity">
