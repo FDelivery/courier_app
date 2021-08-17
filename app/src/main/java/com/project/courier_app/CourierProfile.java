@@ -45,7 +45,7 @@ public class CourierProfile extends AppCompatActivity {
             courier.setId(ID);
 
         }
-        TextMP.setText("welcome "+courier.getFirstName()+ " "+courier.getLastName());
+        TextMP.setText(courier.getFirstName()+ " "+courier.getLastName());
         EmailMP.setText("My email is: "+courier.getEmail());
         Log.i("ppppp",courier.getEmail());
         PhoneMP.setText("My phone is: "+courier.getPrimaryPhone());

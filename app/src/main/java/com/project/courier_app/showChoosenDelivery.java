@@ -57,7 +57,7 @@ String TOKEN;
 
 
         Choose.setOnClickListener((v)->{
-            Intent intent =new Intent(this, CourierMain.class);
+           // Intent intent =new Intent(this, CourierMain.class);
             Log.i("wewewe1","token="+TOKEN);
             Log.i("wewewe1","IDDELIVERY="+IDDELIVERY);
             Call<Void> call= rtfBase.registerDelivery("Bearer "+TOKEN,IDDELIVERY,"COURIER_ACCEPTED");
@@ -68,6 +68,9 @@ String TOKEN;
                     if(response.code() == 200 ||response.code() == 204){
 
                         Log.i("wewewe1","????????5??????");
+                        ChooseDelivery.a.finish();
+                        finish();
+
                         Toast.makeText(showChoosenDelivery.this, "good",Toast.LENGTH_LONG).show();
 
 
@@ -110,16 +113,15 @@ String TOKEN;
     }
 });
 
-        finish();
-            intent.putExtra("CourierUserInGson",CourierUser);
+
+          /*  intent.putExtra("CourierUserInGson",CourierUser);
             Log.i("wewewe1",CourierUser);
             intent.putExtra("id",ID);
             intent.putExtra("token",TOKEN);
             intent.putExtra("delivery",deliveryFromIntent);
-            Log.i("wewewe2",deliveryFromIntent);
+            Log.i("wewewe2",deliveryFromIntent);*/
 
-
-            startActivity(intent);
+        //    startActivity(intent);
         });
         
     }

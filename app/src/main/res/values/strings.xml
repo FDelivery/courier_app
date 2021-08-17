@@ -31,7 +31,6 @@
     <string name="vehicleEP">vehicle :bike car or bicycle </string>
 
 
-
     <!-- activity main. -->
     <string name="forgetPass"><u>FORGOT PASSWORD?</u></string>
     <string name="Connect">LOG IN</string>
@@ -53,19 +52,9 @@
     <string name="enter_bank">bank details</string>
 
 
-
     <!-- activity  bank detailes -->
     <string name="bank">Enter bank details </string>
     <string name="messege">This information is stored for reuse</string>
-
-
-
-
-
-
-
-
-
 
 
 </resources>

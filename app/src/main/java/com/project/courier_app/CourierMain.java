@@ -47,7 +47,7 @@ public class CourierMain extends AppCompatActivity {
 
 
         activeDelivery.setOnClickListener((v) -> {
-Intent intent= new Intent(this, showChoosenDelivery.class);
+Intent intent= new Intent(this, activeDelivery.class); //לבדוק אפשרות שיפנה לאותו אקטיביטי של showChosen
             intent.putExtra("token",TOKEN);
 Log.i("222222",TOKEN);
             startActivity(intent);

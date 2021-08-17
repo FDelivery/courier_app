@@ -2,6 +2,7 @@ package com.project.courier_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,12 +25,13 @@ public class ChooseDelivery extends AppCompatActivity {
     private ListView listView;
     private RetrofitInterface  rtfBase = RetrofitBase.getRetrofitInterface();
     String CourierUser,ID,TOKEN,deliveryID;
+    public static Activity a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_delivery);
         listView=(ListView) findViewById(R.id.listDelivery);
-
+        a=this;
 
         Courier courier;
         Bundle extras = getIntent().getExtras();

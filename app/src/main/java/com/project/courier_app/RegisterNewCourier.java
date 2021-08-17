@@ -39,8 +39,8 @@ public class RegisterNewCourier extends AppCompatActivity {
 
 
         payPage.setOnClickListener( (v) -> {
-           // Intent intent = new Intent(this, CourierMain.class);    //לשים נתיב לדף תשלום
-           // startActivity(intent);
+            Intent intent = new Intent(this, DetailsBank.class);
+            startActivity(intent);
         });
         Create.setOnClickListener((v) -> {
 
