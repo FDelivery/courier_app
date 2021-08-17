@@ -49,7 +49,8 @@ public class CourierMain extends AppCompatActivity {
         activeDelivery.setOnClickListener((v) -> {
 Intent intent= new Intent(this, activeDelivery.class); //לבדוק אפשרות שיפנה לאותו אקטיביטי של showChosen
             intent.putExtra("token",TOKEN);
-Log.i("222222",TOKEN);
+            intent.putExtra("id",ID);
+
             startActivity(intent);
         });
 
@@ -63,7 +64,11 @@ Log.i("222222",TOKEN);
         });
 
         deliveryHistory.setOnClickListener((v) -> {
-            startActivity(new Intent(this, DeliveryHistory.class));
+           Intent intent= new Intent(this, DeliveryHistory.class);
+            intent.putExtra("CourierUserInGson",CourierUser);
+            intent.putExtra("token",TOKEN);
+            intent.putExtra("id",ID);
+            startActivity(intent);
         });
 
         chooseDeliveryFromList.setOnClickListener((v) -> {

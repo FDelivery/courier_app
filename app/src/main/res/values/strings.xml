@@ -17,7 +17,7 @@
     <string name="EmailMP"> mail FROM DB </string>
     <string name="ChangeMP">EDIT</string>
     <string name="PassChangeMP">CHANGE PASSWORD</string>
-    <string name="vehicleMP">vehicle :bike car or bicycle FROM DB </string>
+    <string name="vehicleMP">vehicle :motorcycle car or bicycle FROM DB </string>
     <string name="Phone2MP">additional phone number</string>
 
     <!-- activity edit my profile. -->
@@ -28,7 +28,7 @@
     <string name="EmailEP">new email address</string>
     <string name="ChangeEP">SAVE</string>
     <string name="textEP">Edit Profile</string>
-    <string name="vehicleEP">vehicle :bike car or bicycle </string>
+    <string name="vehicleEP">vehicle :motorcycle car or bicycle </string>
 
 
     <!-- activity main. -->
@@ -47,7 +47,7 @@
     <string name="Phone2">Additional phone number</string>
     <string name="Text">NEW USER</string>
     <string name="Create">CREATE ACCOUNT</string>
-    <string name="vehicle">vehicle :bike car or bicycle </string>
+    <string name="vehicle">vehicle :motorcycle car or bicycle </string>
     <string name="EmailEt">Email</string>
     <string name="enter_bank">bank details</string>
 

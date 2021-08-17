@@ -12,8 +12,22 @@ public class Delivery
     private String deliveredDate;
     private String pickedDate;
     private double price;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
     private String status;
 
+    public void setCurrentDelivery(String currentDelivery) {
+        this.currentDelivery = currentDelivery;
+    }
+
+    private String currentDelivery;
     public void setPrice(double price) {
         this.price = price;
     }

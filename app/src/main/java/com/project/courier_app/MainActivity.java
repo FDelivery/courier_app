@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             handleConnect();
         });
         ForgotPassword.setOnClickListener((v)->{
-           // Intent intent= new Intent(this, ChangePassword.class); ///לעבור לאקטיביטי של שכחתי סיסמה
 
         });
         createNewCourier.setOnClickListener((v) -> {
