@@ -31,7 +31,7 @@ public interface RetrofitInterface
     /////////////////////////////////////////////////////////////////////////////////
 
     @PUT("/api/v1/deliveriesRef/{delivery_id}/") //return void -- update status
-    Call<Void> registerDelivery(@Header("Authorization") String token,@Path("delivery_id") String id, @Query("status") String status);
+    Call<Void> registerDelivery(@Header("Authorization") String token,@Path("delivery_id") String id, @Body HashMap<String, String> status);
 
     @GET("/api/v1/users/{user_id}") //return gson string (user) /// להכין כזה בשרת
     Call<List<String>> getDeliveriesHistory(@Path("user_id") String id);

@@ -60,7 +60,9 @@ String TOKEN;
            // Intent intent =new Intent(this, CourierMain.class);
             Log.i("wewewe1","token="+TOKEN);
             Log.i("wewewe1","IDDELIVERY="+IDDELIVERY);
-            Call<Void> call= rtfBase.registerDelivery("Bearer "+TOKEN,IDDELIVERY,"COURIER_ACCEPTED");
+            HashMap<String, String> statusMap = new HashMap<String, String>();
+            statusMap.put("status","COURIER_ACCEPTED");
+            Call<Void> call= rtfBase.registerDelivery("Bearer "+TOKEN,IDDELIVERY,statusMap);
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {

@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.util.HashMap;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,7 +45,9 @@ public class activeDelivery extends AppCompatActivity {
 
 
         inTransitB.setOnClickListener((v -> {
-            Call<Void> call = rtfBase.registerDelivery("Bearer "+TOKEN,myDeliveryID,"IN_TRANSIT");
+            HashMap<String, String> statusMap = new HashMap<String, String>();
+            statusMap.put("status","IN_TRANSIT");
+            Call<Void> call = rtfBase.registerDelivery("Bearer "+TOKEN,myDeliveryID,statusMap);
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
@@ -69,7 +73,9 @@ public class activeDelivery extends AppCompatActivity {
 
 
         exceptionB.setOnClickListener((v -> {
-            Call<Void> call = rtfBase.registerDelivery("Bearer "+TOKEN,myDeliveryID,"EXCEPTION");
+            HashMap<String, String> statusMap = new HashMap<String, String>();
+            statusMap.put("status","EXCEPTION");
+            Call<Void> call = rtfBase.registerDelivery("Bearer "+TOKEN,myDeliveryID,statusMap);
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
@@ -95,7 +101,9 @@ public class activeDelivery extends AppCompatActivity {
 
 
         deliveredB.setOnClickListener((v -> {
-            Call<Void> call = rtfBase.registerDelivery("Bearer "+TOKEN,myDeliveryID,"DELIVERED");
+            HashMap<String, String> statusMap = new HashMap<String, String>();
+            statusMap.put("status","DELIVERED");
+            Call<Void> call = rtfBase.registerDelivery("Bearer "+TOKEN,myDeliveryID,statusMap);
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
