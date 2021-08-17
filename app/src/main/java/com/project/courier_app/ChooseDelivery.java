@@ -17,22 +17,30 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.Socket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class ChooseDelivery extends AppCompatActivity {
     private ListView listView;
     private RetrofitInterface  rtfBase = RetrofitBase.getRetrofitInterface();
     String CourierUser,ID,TOKEN,deliveryID;
     public static Activity a;
+    private Socket mSocket;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_delivery);
         listView=(ListView) findViewById(R.id.listDelivery);
         a=this;
+        mSocket = SocketIO.getSocket();
+        mSocket.on("delivery_accepted_for_courier", (msg)-> {
+            GetDeliveries();
 
+        });
+        mSocket.on("delivery_posted", (msg)->GetDeliveries());
         Courier courier;
         Bundle extras = getIntent().getExtras();
 
@@ -42,9 +50,6 @@ public class ChooseDelivery extends AppCompatActivity {
             ID =extras.getString("id");
             TOKEN=extras.getString("token");
             courier = new Gson().fromJson(CourierUser, Courier.class);
-
-
-
             GetDeliveries();
         }
 
@@ -52,11 +57,22 @@ public class ChooseDelivery extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSocket.disconnect();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mSocket.off("delivery_accepted");
+        mSocket.off("delivery_accepted_for_courier");
+    }
 
     private void GetDeliveries() //this give us all deliveries with status "COURIER_SEARCHING"
     {
         Call<List<String>> call = rtfBase.getDeliveries("COURIER_SEARCHING");
-        ArrayList<String> arrayList=new ArrayList<>();
+        ArrayList<String> arrayList = new ArrayList<>();
         call.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response)
@@ -75,7 +91,7 @@ public class ChooseDelivery extends AppCompatActivity {
 
                         Delivery delivery = new Gson().fromJson(response.body().get(i), Delivery.class);
                         delivery.setId(deliveryID);
-                        arrayList.add(delivery.getClientName()+" "+delivery.getClientPhone()+"                                     id="+deliveryID);
+                        arrayList.add(delivery.getClientName()+" "+delivery.getClientPhone()+"\nid="+deliveryID);
 
                     }
                     help(arrayList);
@@ -145,6 +161,5 @@ public class ChooseDelivery extends AppCompatActivity {
             }
         });
     }
-
 
 }
