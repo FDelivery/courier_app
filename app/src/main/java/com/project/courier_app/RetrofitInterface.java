@@ -36,6 +36,10 @@ public interface RetrofitInterface
     @GET("/api/v1/deliveriesRef/{delivery_id}/") ////return gson string (Delivery)
     Call<String> getDelivery(@Path("delivery_id") String id);
 
+
+
+    ///////////////
+
 //    @PUT("/api/v1/deliveriesRef/{delivery_id}/") //return void
   //  Call<Void> updateDelivery(@Header("Authorization") String token, @Path("delivery_id") String id, @Body Delivery d);
 
@@ -43,7 +47,7 @@ public interface RetrofitInterface
     Call<List<String>> getDeliveriesHistory(@Path("user_id") String id);
 
     @GET("/api/v1/deliveriesRef/") ////return gson string (Delivery)
-    Call<List<String>> getDeliveriesHistory(@Query("status") String status ,@Query("AddedBy") String addBY);
+    Call<List<String>> getDeliveriesHistory(@Query("status") String status ,@Query("courierRef") String id);
 
 
 }

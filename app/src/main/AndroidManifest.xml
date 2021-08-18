@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Courierapp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activeDelivery"></activity>
+        <activity android:name=".showChosenFromHistory"></activity>
+        <activity android:name=".activeDelivery" />
         <activity android:name=".DetailsBank" />
         <activity android:name=".EditMyProfile" />
         <activity android:name=".ChangePassword" />

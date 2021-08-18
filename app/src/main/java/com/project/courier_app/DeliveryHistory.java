@@ -45,15 +45,15 @@ public class DeliveryHistory extends AppCompatActivity {
             TOKEN = extras.getString(("token"));
         }
 
-        GetDeliveries();
+        GetDeliveries(ID);
     }
 
 
 
 
-    private void GetDeliveries() //this give us all deliveries with status "COURIER_SEARCHING"
+    private void GetDeliveries(String id) //this give us all deliveries that this id-user added
     {
-        Call<List<String>> call = rtfBase.getDeliveries(ID);
+        Call<List<String>> call = rtfBase.getDeliveriesHistory("DELIVERED",id);
         ArrayList<String> arrayList=new ArrayList<>();
         call.enqueue(new Callback<List<String>>() {
             @Override
@@ -62,21 +62,22 @@ public class DeliveryHistory extends AppCompatActivity {
 
                 if(response.code() == 400)
                 {
-                    Toast.makeText(DeliveryHistory.this, "this ID do not exist",Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(DeliveryHistory.this, "you have no active deliveries",Toast.LENGTH_LONG).show();
+                    finish();
                 }
                 if(response.code() == 200)
                 {
-
+                    Log.i("TEST1", String.valueOf(response.body()));
                     for(int i=0;i<response.body().size();i++) {
-                        deliveryID=response.body().get(i);
+                        String deliveryID=response.body().get(i).substring(18,42);
+                        Log.i("TEST6", deliveryID);
 
                         Delivery delivery = new Gson().fromJson(response.body().get(i), Delivery.class);
                         delivery.setId(deliveryID);
                         arrayList.add(delivery.getClientName()+" "+delivery.getClientPhone()+"\nid="+deliveryID);
-
+                        help(arrayList);
                     }
-                    help(arrayList);
+
                 }
             }
 
@@ -87,7 +88,6 @@ public class DeliveryHistory extends AppCompatActivity {
             }
         });
     }
-
 
     private void help(ArrayList<String> arrayList){
         ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
@@ -108,7 +108,7 @@ public class DeliveryHistory extends AppCompatActivity {
     private void GetDelivery(String idDelivery) //put delivery id and this return you the delivery
     {
         Call<String> call = rtfBase.getDelivery(idDelivery);
-        Intent intent=new Intent(this,DeliveryHistory.class);
+        Intent intent=new Intent(this,showChosenFromHistory.class);
 
         call.enqueue(new Callback<String>() {
             @Override
