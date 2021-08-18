@@ -49,14 +49,14 @@ public class CourierProfile extends AppCompatActivity {
         EmailMP.setText("My email is: "+courier.getEmail());
         Log.i("ppppp",courier.getEmail());
         PhoneMP.setText("My phone is: "+courier.getPrimaryPhone());
-        PhoneMP.setText("My secondary phone is: "+courier.getSecondaryPhone());
+       // Phone2MP.setText("My secondary phone is: "+courier.getSecondaryPhone());
 
         if((courier.getSecondaryPhone()!=null)&&(!courier.getSecondaryPhone().isEmpty()))
         {
-            Phone2MP.setText("My second phone is: "+courier.getSecondaryPhone());
+            Phone2MP.setText("My secondary phone is: "+courier.getSecondaryPhone());
         }
         else{
-            Phone2MP.setText("My second phone is: No number entered");
+            Phone2MP.setText("My secondary phone is: No number entered");
 
         }
         vehicleMP.setText("My vehicle is: "+courier.getVehicle());
