@@ -17,9 +17,9 @@ public class Courier  {
         return currentDelivery;
     }
 
-    public void setCurrentDelivery(String currentDelivery) {
+  /*  public void setCurrentDelivery(String currentDelivery) {
         this.currentDelivery = currentDelivery;
-    }
+    }*/
 
     public String getSecondaryPhone() {
         return secondaryPhone;

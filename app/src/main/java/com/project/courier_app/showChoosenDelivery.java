@@ -77,6 +77,7 @@ String TOKEN;
 
                     }else if(response.code()==400){
                         Toast.makeText(showChoosenDelivery.this, "You already registered for a delivery",Toast.LENGTH_LONG).show();
+                        return;
 
                     }
                     else{
