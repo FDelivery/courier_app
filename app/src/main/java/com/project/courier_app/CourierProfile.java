@@ -50,7 +50,8 @@ public class CourierProfile extends AppCompatActivity {
         Log.i("ppppp",courier.getEmail());
         PhoneMP.setText("My phone is: "+courier.getPrimaryPhone());
         PhoneMP.setText("My secondary phone is: "+courier.getSecondaryPhone());
-        if(!courier.getSecondaryPhone().isEmpty())
+
+        if((courier.getSecondaryPhone()!=null)&&(!courier.getSecondaryPhone().isEmpty()))
         {
             Phone2MP.setText("My second phone is: "+courier.getSecondaryPhone());
         }

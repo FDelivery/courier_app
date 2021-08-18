@@ -53,7 +53,7 @@ public class DeliveryHistory extends AppCompatActivity {
 
     private void GetDeliveries() //this give us all deliveries with status "COURIER_SEARCHING"
     {
-        Call<List<String>> call = rtfBase.getDeliveriesHistory(ID);
+        Call<List<String>> call = rtfBase.getDeliveries(ID);
         ArrayList<String> arrayList=new ArrayList<>();
         call.enqueue(new Callback<List<String>>() {
             @Override
@@ -73,7 +73,7 @@ public class DeliveryHistory extends AppCompatActivity {
 
                         Delivery delivery = new Gson().fromJson(response.body().get(i), Delivery.class);
                         delivery.setId(deliveryID);
-                        arrayList.add(delivery.getClientName()+" "+delivery.getClientPhone()+"                                     id="+deliveryID);
+                        arrayList.add(delivery.getClientName()+" "+delivery.getClientPhone()+"\nid="+deliveryID);
 
                     }
                     help(arrayList);
@@ -97,7 +97,7 @@ public class DeliveryHistory extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Log.i("whatt",arrayList.get(position));
-                GetDelivery(arrayList.get(position));
+                GetDelivery(arrayList.get(position).split("id=")[1]);
 
 
 
