@@ -66,8 +66,6 @@
         android:id="@+id/forgotPass"
         android:layout_width="193dp"
         android:layout_height="46dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginLeft="108dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:text="@string/forgetPass"
@@ -77,6 +75,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:drawableTint="#C956CE"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Connect" />
 
@@ -85,14 +84,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="128dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginRight="120dp"
+        android:layout_marginBottom="17dp"
         android:clickable="true"
         android:text="@string/newCourier"
         android:textColor="#C956CE"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/forgotPass" />
 
     <View
@@ -139,9 +139,13 @@
         android:id="@+id/imageView4"
         android:layout_width="73dp"
         android:layout_height="62dp"
+        app:layout_constraintBottom_toBottomOf="@+id/newCourier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.219"
         app:srcCompat="@drawable/deliveryman"
-        tools:layout_editor_absoluteX="289dp"
-        tools:layout_editor_absoluteY="157dp"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

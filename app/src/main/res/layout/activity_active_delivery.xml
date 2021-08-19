@@ -4,61 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+android:background="@drawable/circule"
     tools:context=".showChoosenDelivery">
+
     <TextView
         android:id="@+id/info"
-        android:layout_width="358dp"
-        android:layout_height="428dp"
-        android:ems="10"
+        android:layout_width="361dp"
+        android:layout_height="500dp"
+        android:background="@drawable/border"
+        android:ems="14"
+        android:hint="@string/info"
+        android:padding="20dp"
+        android:textColor="@color/purple_200"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.743" />
+        app:layout_constraintVertical_bias="0.069" />
 
     <Button
         android:id="@+id/EXCEPTION"
-        android:layout_width="138dp"
-        android:layout_height="50dp"
-        android:text="EXCEPTION"
-        android:textColor="#070707"
-        app:backgroundTint="#C9FDD835"
+        android:layout_width="352dp"
+        android:layout_height="43dp"
+
+        android:background="@drawable/round_buttom"
+        android:text="@string/EXCEPTION"
+        android:textColor="#ffffff"
+        app:backgroundTint="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintVertical_bias="0.957" />
 
     <Button
         android:id="@+id/IN_TRANSIT"
-        android:layout_width="105dp"
-        android:layout_height="63dp"
-        android:text="IN_TRANSIT"
-        android:textColor="#070707"
-        app:backgroundTint="#C9FDD835"
+        android:layout_width="352dp"
+        android:layout_height="43dp"
+
+        android:background="@drawable/round_buttom"
+        android:text="@string/IN_TRANSIT"
+        android:textColor="#ffffff"
+        app:backgroundTint="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.194" />
+        app:layout_constraintVertical_bias="0.802" />
 
     <Button
         android:id="@+id/DELIVERED"
-        android:layout_width="105dp"
-        android:layout_height="63dp"
-        android:text="DELIVERED"
-        android:textColor="#070707"
-        app:backgroundTint="#C9FDD835"
+        android:layout_width="352dp"
+        android:layout_height="43dp"
+
+        android:background="@drawable/round_buttom"
+        android:text="@string/DELIVERED"
+        android:textColor="#ffffff"
+        app:backgroundTint="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.758"
+        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.184" />
+        app:layout_constraintVertical_bias="0.88" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

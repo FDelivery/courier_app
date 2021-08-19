@@ -9,15 +9,15 @@
     <string name="ConformPasswordChange">SAVE</string>
 
     <!-- activity courier main -->
-    <string name="textViewWelcom">hello (user name)</string>
+    <string name="textViewWelcom">hello user </string>
 
     <!-- activity courier profile. -->
-    <string name="PhoneMP">phone FROM DB </string>
-    <string name="textMP">courier name FROM DB </string>
-    <string name="EmailMP"> mail FROM DB </string>
+    <string name="PhoneMP">phone </string>
+    <string name="textMP">courier name </string>
+    <string name="EmailMP"> mail </string>
     <string name="ChangeMP">EDIT</string>
     <string name="PassChangeMP">CHANGE PASSWORD</string>
-    <string name="vehicleMP">vehicle :motorcycle car or bicycle FROM DB </string>
+    <string name="vehicleMP">vehicle :motorcycle car or bicycle </string>
     <string name="Phone2MP">additional phone number</string>
 
     <!-- activity edit my profile. -->
@@ -47,7 +47,7 @@
     <string name="Phone2">Additional phone number</string>
     <string name="Text">NEW USER</string>
     <string name="Create">CREATE ACCOUNT</string>
-    <string name="vehicle">vehicle :motorcycle car or bicycle </string>
+    <string name="vehicle">vehicle : motorcycle car or bicycle </string>
     <string name="EmailEt">Email</string>
     <string name="enter_bank">bank details</string>
 
@@ -55,6 +55,30 @@
     <!-- activity  bank detailes -->
     <string name="bank">Enter bank details </string>
     <string name="messege">This information is stored for reuse</string>
+
+
+    <!-- activity  active delivery -->
+    <string name="IN_TRANSIT">on the way to the client</string>
+    <string name="DELIVERED">delivery was delivered to client </string>
+    <string name="EXCEPTION">something is wrong </string>
+    <string name="info">there isnt a delivery to present </string>
+
+    <!-- activity  show coosen -->
+    <string name="printall"> there is no delivery to present</string>
+    <string name="choose"> CHOOSE</string>
+
+
+    <!-- activity  show coosen from history-->
+    <string name="showInfo"> there is no delivery to present</string>
+
+
+
+
+
+
+
+
+
 
 
 </resources>
