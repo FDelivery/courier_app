@@ -1,9 +1,5 @@
 package com.project.courier_app;
 
-
-
-import android.os.Bundle;
-
 public class Courier  {
 
     private String email, primaryPhone ,secondaryPhone, password, firstName, lastName, id,token,vehicle,currentDelivery;

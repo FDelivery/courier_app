@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rtfBase = RetrofitBase.getRetrofitInterface();
-        EmailEt = (EditText)findViewById(R.id.Email);
-        PasswordEt = (EditText)findViewById(R.id.Password);
-        logIn=(Button)findViewById(R.id.Connect);
+        EmailEt = findViewById(R.id.Email);
+        PasswordEt = findViewById(R.id.Password);
+        logIn=findViewById(R.id.Connect);
         ForgotPassword = findViewById(R.id.forgotPass);
         createNewCourier = findViewById(R.id.newCourier);
 
@@ -52,9 +52,13 @@ public class MainActivity extends AppCompatActivity {
             }
             handleConnect();
         });
-        ForgotPassword.setOnClickListener((v)->{
 
+
+        ForgotPassword.setOnClickListener((v)->{
         });
+
+
+        //create new courier
         createNewCourier.setOnClickListener((v) -> {
            Intent intent= new Intent(this, RegisterNewCourier.class);
             startActivity(intent);
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+// log in. return token and id if the user is exist
     private void handleConnect() {
         HashMap<String, String> credentials = new HashMap<>();
         credentials.put("email",EmailEt.getText().toString());
@@ -76,12 +80,11 @@ public class MainActivity extends AppCompatActivity {
                 if(response.code() == 200)
                 {
                     //success
-                    Toast.makeText(MainActivity.this, "You have logged in successfully", Toast.LENGTH_LONG).show();
                     String[] tokenAndID = new String[2];
                     tokenAndID=response.body();
                     TOKEN=tokenAndID[0];
                     ID=tokenAndID[1];
-                    GetUser(ID);
+                    GetUser();
 
                 }
                 if(response.code() == 400 || response.code() == 401)
@@ -90,24 +93,30 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "log in failed-try again", Toast.LENGTH_LONG).show();
 
                 }
+                if(response.code() == 500)
+                {
+                    //failure
+                    Toast.makeText(MainActivity.this, "user do not exist", Toast.LENGTH_LONG).show();
+
+                }
 
             }
 
             @Override
             public void onFailure(Call<String[]> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Something went wrong" +t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
 
     // get- in id, return user
-    public void GetUser(String id)
+    public void GetUser()
     {
 
         Intent intent = new Intent(this, CourierMain.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        Call<String> call = rtfBase.getUser(id);
+        Call<String> call = rtfBase.getUser(ID);
 
 
         call.enqueue(new Callback<String>() {
@@ -118,8 +127,9 @@ public class MainActivity extends AppCompatActivity {
                 if(response.code() == 200)
                 {
                     //success
+                    Toast.makeText(MainActivity.this, "You have logged in successfully", Toast.LENGTH_LONG).show();
                     intent.putExtra("CourierUserInGson",response.body());
-                    intent.putExtra("id",id);
+                    intent.putExtra("id",ID);
                     intent.putExtra("token",TOKEN);
 
                     startActivity(intent);
@@ -133,11 +143,12 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
+
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Something went wrong " +t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
             }
         });

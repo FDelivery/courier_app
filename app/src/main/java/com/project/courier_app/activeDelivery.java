@@ -2,6 +2,7 @@ package com.project.courier_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -23,15 +24,15 @@ public class activeDelivery extends AppCompatActivity {
     Button deliveredB,exceptionB,inTransitB;
     private TextView info;
     Delivery delivery;
-
+    HashMap<String, String> statusMap = new HashMap<String, String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active_delivery);
         rtfBase = RetrofitBase.getRetrofitInterface();
-        deliveredB=(Button)findViewById(R.id.DELIVERED);
-        exceptionB=(Button)findViewById(R.id.EXCEPTION);
-        inTransitB=(Button)findViewById(R.id.IN_TRANSIT);
+        deliveredB=findViewById(R.id.DELIVERED);
+        exceptionB=findViewById(R.id.EXCEPTION);
+        inTransitB=findViewById(R.id.IN_TRANSIT);
 
         info=(TextView)findViewById(R.id.info);
 
@@ -43,159 +44,143 @@ public class activeDelivery extends AppCompatActivity {
             TOKEN=extras.getString("token");
         }
 
+//we need to pull the user and the delivery from DB
+        getUser();
 
+
+
+//update that the delivery in transit
         inTransitB.setOnClickListener((v -> {
-            HashMap<String, String> statusMap = new HashMap<String, String>();
-            statusMap.put("status","IN_TRANSIT");
-            Call<Void> call = rtfBase.registerDelivery("Bearer "+TOKEN,myDeliveryID,statusMap);
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    if(response.code()==200){
-                        Toast.makeText(activeDelivery.this, "status updates",Toast.LENGTH_LONG).show();
-
-                    }
-                    else{
-                        Toast.makeText(activeDelivery.this, "status  not updates",Toast.LENGTH_LONG).show();
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(activeDelivery.this, t.getMessage(),Toast.LENGTH_LONG).show();
-
-                }
-            });
-
-
+            updateStatus("IN_TRANSIT");
         }));
 
-
+//update that we have a problem with this delivery
         exceptionB.setOnClickListener((v -> {
-            HashMap<String, String> statusMap = new HashMap<String, String>();
-            statusMap.put("status","EXCEPTION");
-            Call<Void> call = rtfBase.registerDelivery("Bearer "+TOKEN,myDeliveryID,statusMap);
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    if(response.code()==200){
-                        Toast.makeText(activeDelivery.this, "status updates",Toast.LENGTH_LONG).show();
-
-                    }
-                    else{
-                        Toast.makeText(activeDelivery.this, "status  not updates",Toast.LENGTH_LONG).show();
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(activeDelivery.this, t.getMessage(),Toast.LENGTH_LONG).show();
-
-                }
-            });
-
+            updateStatus("EXCEPTION");
 
         }));
 
-
+//update that the delivery is delivered successfully
         deliveredB.setOnClickListener((v -> {
-            HashMap<String, String> statusMap = new HashMap<String, String>();
-            statusMap.put("status","DELIVERED");
-            Call<Void> call = rtfBase.registerDelivery("Bearer "+TOKEN,myDeliveryID,statusMap);
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.code()==200){
-                    Toast.makeText(activeDelivery.this, "status updates",Toast.LENGTH_LONG).show();
-
-                }
-                else{
-                    Toast.makeText(activeDelivery.this, "status  not updates",Toast.LENGTH_LONG).show();
-
-                }
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(activeDelivery.this, t.getMessage(),Toast.LENGTH_LONG).show();
-
-                }
-            });
-
-
+            updateStatus("DELIVERED");
+            updateMyCurrentDelivery();
         }));
 
 
+
+    }
+
+    //we need to pull the user from DB
+    private void getUser(){
         Call<String> call= rtfBase.getUser(ID);
         call.enqueue(new Callback<String>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.code() == 200 ||response.code() == 204){
 
                     CourierUser=response.body();
                     courier=new Gson().fromJson(CourierUser, Courier.class) ;
-                    if(courier.getCurrentDelivery()!=null) {
+                    if(!courier.getCurrentDelivery().equals("None")) {
                         myDeliveryID = courier.getCurrentDelivery();
-
-
-                        Call<String> call2= rtfBase.getDelivery(myDeliveryID);
-                        call2.enqueue(new Callback<String>() {
-                            @Override
-                            public void onResponse(Call<String> call, Response<String> response) {
-                                if(response.code() == 200 ||response.code() == 204) {
-
-                                    myDeliveryNuw=response.body();
-                                    delivery = new Gson().fromJson(myDeliveryNuw, Delivery.class);
-                                    info.setText(delivery.toString());
-                                   // Toast.makeText(activeDelivery.this, "status updates",Toast.LENGTH_LONG).show();
-
-                                }
-                                else{
-                                //    Toast.makeText(activeDelivery.this, "status not change",Toast.LENGTH_LONG).show();
-
-                                }
-                                }
-
-                            @Override
-                            public void onFailure(Call<String> call, Throwable t) {
-                                Toast.makeText(activeDelivery.this, "something not good"+t.getMessage(),Toast.LENGTH_LONG).show();
-
-                            }
-                        });
-
-
-
-
-
+                        getCurrentDelivery();
                     }
-                    else{
-                        Log.i("bbbbbb",courier.getCurrentDelivery());
-                    }
-                 //   info.setText(delivery.toString());
 
+                }else Toast.makeText(activeDelivery.this, "user id not found",Toast.LENGTH_LONG).show();
 
-                    Toast.makeText(activeDelivery.this, "good",Toast.LENGTH_LONG).show();
+            }
 
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(activeDelivery.this, t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
 
-                }else{
-                    Toast.makeText(activeDelivery.this, "something not good",Toast.LENGTH_LONG).show();
+    }
+
+    //we need to pull the current delivery from DB
+    private void getCurrentDelivery(){
+        Call<String> call= rtfBase.getDelivery(myDeliveryID);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.code() == 200 ||response.code() == 204) {
+
+                    myDeliveryNuw=response.body();
+                    delivery = new Gson().fromJson(myDeliveryNuw, Delivery.class);
+                    info.setText(delivery.toString());
+
+                }
+                else{
+                        Toast.makeText(activeDelivery.this, " delivery id not found",Toast.LENGTH_LONG).show();
 
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(activeDelivery.this, "something not good "+t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(activeDelivery.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
+
+
+    //after click on delivered we need to update that "no active delivery"
+    private void updateMyCurrentDelivery(){
+
+        HashMap<String, String> map=new HashMap<>();
+        map.put("currentDelivery","None");
+        Call<Void> call2= rtfBase.updateUser(ID,map);
+        call2.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                if(response.code()==200){
+                    Toast.makeText(activeDelivery.this, "update",Toast.LENGTH_SHORT).show();
+
+                }else{
+                    Toast.makeText(activeDelivery.this, "update fails",Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(activeDelivery.this, t.getMessage(),Toast.LENGTH_LONG).show();
 
             }
         });
 
-
-
-
-
     }
+
+
+//update the delivery status
+     private void updateStatus(String status){
+         statusMap.put("status",status);
+         Call<Void> call = rtfBase.registerDelivery("Bearer "+TOKEN,myDeliveryID,statusMap);
+         call.enqueue(new Callback<Void>() {
+             @Override
+             public void onResponse(Call<Void> call, Response<Void> response) {
+                 if(response.code()==200){
+                     Toast.makeText(activeDelivery.this, "status updated",Toast.LENGTH_LONG).show();
+
+                 }
+                 else{
+                     Toast.makeText(activeDelivery.this, "status not updates",Toast.LENGTH_LONG).show();
+
+                 }
+             }
+
+             @Override
+             public void onFailure(Call<Void> call, Throwable t) {
+                 Toast.makeText(activeDelivery.this, t.getMessage(),Toast.LENGTH_LONG).show();
+
+             }
+         });
+    }
+
+
 
 }

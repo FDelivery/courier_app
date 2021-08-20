@@ -33,14 +33,14 @@ public class EditMyProfile extends AppCompatActivity {
         setContentView(R.layout.activity_edit_my_profile);
 
         rtfBase = RetrofitBase.getRetrofitInterface();
-        save=(Button)findViewById(R.id.save);
-        EmailEP=(EditText) findViewById(R.id.EmailEP);
-        FirstNameEP=(EditText)findViewById(R.id.FirstNameEP);
-        LastNameEP=(EditText)findViewById(R.id.LastNameEP);
-        TextEP=(TextView)findViewById(R.id.TextEP);
-        PhoneEP=(EditText)findViewById(R.id.PhoneEP);
-        PhoneEP2=(EditText)findViewById(R.id.Phone2EP);
-        VehicleEP=(EditText)findViewById(R.id.vehicleEP);
+        save=findViewById(R.id.save);
+        EmailEP= findViewById(R.id.EmailEP);
+        FirstNameEP=findViewById(R.id.FirstNameEP);
+        LastNameEP=findViewById(R.id.LastNameEP);
+        TextEP=findViewById(R.id.TextEP);
+        PhoneEP=findViewById(R.id.PhoneEP);
+        PhoneEP2=findViewById(R.id.Phone2EP);
+        VehicleEP=findViewById(R.id.vehicleEP);
 
         Bundle extras = getIntent().getExtras();
 
@@ -55,14 +55,14 @@ public class EditMyProfile extends AppCompatActivity {
 
 
         save.setOnClickListener((v) -> {
-            updateUser(ID);
+            updateUser();
 
         });
     }
 
 
-
-    private void updateUser(String id)
+//this sent the new info and update in DB
+    private void updateUser()
     {
         HashMap<String, String> map=new HashMap<>();
         String emailText= EmailEP.getText().toString();
@@ -106,8 +106,7 @@ public class EditMyProfile extends AppCompatActivity {
         }
 
 
-
-        Call<Void> call = rtfBase.updateUser(id,map);
+        Call<Void> call = rtfBase.updateUser(ID,map);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -115,7 +114,7 @@ public class EditMyProfile extends AppCompatActivity {
                 {
 
                     Toast.makeText(EditMyProfile.this, "We update successfully", Toast.LENGTH_LONG).show();
-                    GetUser(id);
+                    GetUser();
                 }
 
                 if(response.code() == 400 || response.code()==500)
@@ -127,19 +126,19 @@ public class EditMyProfile extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(EditMyProfile.this, "Something went wrong " +t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(EditMyProfile.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
             }
         });
     }
 
-    // get- in id, return user
-    public void GetUser(String id)
+    // get- in id, return user after update info
+    public void GetUser()
     {
 
         Intent intent = new Intent(this, CourierMain.class);
 
-        Call<String> call = rtfBase.getUser(id);
+        Call<String> call = rtfBase.getUser(ID);
 
 
         call.enqueue(new Callback<String>() {
@@ -152,8 +151,10 @@ public class EditMyProfile extends AppCompatActivity {
 
 
                     intent.putExtra("CourierUserInGson",response.body());
-                    intent.putExtra("id",id);
+                    intent.putExtra("id",ID);
                     intent.putExtra("token",TOKEN);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                     startActivity(intent);
 
                 }
@@ -176,12 +177,6 @@ public class EditMyProfile extends AppCompatActivity {
 
 
     }
-
-
-
-
-
-
 
 
 }

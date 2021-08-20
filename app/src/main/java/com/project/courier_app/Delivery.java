@@ -10,7 +10,6 @@ public class Delivery
     private String Note;
     private String Time;
     private String deliveredDate;
-    private String pickedDate;
     private double price;
 
     public void setStatus(String status) {

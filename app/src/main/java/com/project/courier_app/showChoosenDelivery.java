@@ -5,7 +5,6 @@ package com.project.courier_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -22,18 +21,18 @@ import retrofit2.Response;
 
 public class showChoosenDelivery extends AppCompatActivity {
     private RetrofitInterface  rtfBase = RetrofitBase.getRetrofitInterface();
-    private TextView printall;
+    private TextView deliveriInfo;
     private Button Choose;
-    Courier courier;
-String TOKEN;
-    String deliveryFromIntent,IDDELIVERY,ID,CourierUser;
+
+    String TOKEN;
+    String DELIVERY,IDDELIVERY,ID,CourierUser;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_choosen);
-        printall = (TextView)findViewById(R.id.printall);
-        Choose=(Button)findViewById(R.id.choose);
+        deliveriInfo = findViewById(R.id.printall);
+        Choose=findViewById(R.id.choose);
 
 
 
@@ -43,115 +42,109 @@ String TOKEN;
         if(extras!=null)
         {
 
-           // CourierUser = extras.getString("CourierUserInGson");
-          //  courier=new Gson().fromJson(CourierUser, Courier.class);
             ID =extras.getString("id");
             IDDELIVERY=extras.getString("idDelivery");
-            deliveryFromIntent=extras.getString("delivery");
-            delivery=new Gson().fromJson(deliveryFromIntent, Delivery.class) ;
-            printall.setText("ID: "+IDDELIVERY+"\n" +delivery.toString());
+            DELIVERY =extras.getString("delivery");
+            delivery=new Gson().fromJson(DELIVERY, Delivery.class) ;
+            deliveriInfo.setText("ID: "+IDDELIVERY+"\n" +delivery.toString());
             TOKEN=extras.getString("token");
 
 
         }
 
-
+//choose a deliver for sending it
         Choose.setOnClickListener((v)->{
-           // Intent intent =new Intent(this, CourierMain.class);
-            Log.i("wewewe1","token="+TOKEN);
-            Log.i("wewewe1","IDDELIVERY="+IDDELIVERY);
-            HashMap<String, String> statusMap = new HashMap<String, String>();
-            statusMap.put("status","COURIER_ACCEPTED");
-            Call<Void> call= rtfBase.registerDelivery("Bearer "+TOKEN,IDDELIVERY,statusMap);
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
+            takeDeliver();
 
-                    if(response.code() == 200 ||response.code() == 204){
-
-                        Log.i("wewewe1","????????5??????");
-                        ChooseDelivery.a.finish();
-                        finish();
-
-                        Toast.makeText(showChoosenDelivery.this, "good",Toast.LENGTH_LONG).show();
-
-                    }else if(response.code()==400){
-                        Toast.makeText(showChoosenDelivery.this, "You already registered for a delivery",Toast.LENGTH_LONG).show();
-                        return;
-
-                    }
-                    else{
-                        Toast.makeText(showChoosenDelivery.this, "something not good",Toast.LENGTH_LONG).show();
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(showChoosenDelivery.this, "something not good"+t.getMessage(),Toast.LENGTH_LONG).show();
-
-                }
-            });
-            Log.i("wewewe1","del="+IDDELIVERY);
-            Log.i("wewewe1","id="+ID);
-
-            HashMap<String, String> map=new HashMap<>();
-            map.put("currentDelivery",IDDELIVERY);
-            Call<Void> call2= rtfBase.updateUser(ID,map);
-            call2.enqueue(new Callback<Void>() {
-               @Override
-               public void onResponse(Call<Void> call, Response<Void> response) {
-
-                   if(response.code()==200){
-
-                       Log.i("wewewe1","????????3??????");
-                         help();
-                   }else{
-                       Toast.makeText(showChoosenDelivery.this, "something not good-updateUser",Toast.LENGTH_LONG).show();
-
-                   }
-              }
-
-    @Override
-    public void onFailure(Call<Void> call, Throwable t) {
-        Toast.makeText(showChoosenDelivery.this, "something not good"+t.getMessage(),Toast.LENGTH_LONG).show();
-
-    }
-});
-
-
-          /*  intent.putExtra("CourierUserInGson",CourierUser);
-            Log.i("wewewe1",CourierUser);
-            intent.putExtra("id",ID);
-            intent.putExtra("token",TOKEN);
-            intent.putExtra("delivery",deliveryFromIntent);
-            Log.i("wewewe2",deliveryFromIntent);*/
-
-        //    startActivity(intent);
         });
         
     }
 
 
+
+
+//update the delivery status
+  private void takeDeliver(){
+      HashMap<String, String> statusMap = new HashMap<String, String>();
+      statusMap.put("status","COURIER_ACCEPTED");
+      Call<Void> call= rtfBase.registerDelivery("Bearer "+TOKEN,IDDELIVERY,statusMap);
+      call.enqueue(new Callback<Void>() {
+          @Override
+          public void onResponse(Call<Void> call, Response<Void> response) {
+
+              if(response.code() == 200 ||response.code() == 204) {
+
+
+                  ChooseDelivery.a.finish();
+                  finish();
+
+                  updateUser();
+
+              }
+              else{
+                  Toast.makeText(showChoosenDelivery.this, "delivery id not exist",Toast.LENGTH_LONG).show();
+
+              }
+          }
+
+          @Override
+          public void onFailure(Call<Void> call, Throwable t) {
+              Toast.makeText(showChoosenDelivery.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+          }
+      });
+
+
+
+  }
+
+  //we need to update in user info the id-delivery
+  private void updateUser(){
+      HashMap<String, String> map=new HashMap<>();
+      map.put("currentDelivery",IDDELIVERY);
+      Call<Void> call2= rtfBase.updateUser(ID,map);
+      call2.enqueue(new Callback<Void>() {
+          @Override
+          public void onResponse(Call<Void> call, Response<Void> response) {
+
+              if(response.code()==200){
+                  Toast.makeText(showChoosenDelivery.this, "Successfully selected",Toast.LENGTH_LONG).show();
+
+                  help();
+              }else{
+                  Toast.makeText(showChoosenDelivery.this, "user id not exist",Toast.LENGTH_LONG).show();
+
+              }
+          }
+
+          @Override
+          public void onFailure(Call<Void> call, Throwable t) {
+              Toast.makeText(showChoosenDelivery.this, t.getMessage(),Toast.LENGTH_LONG).show();
+
+          }
+      });
+
+  }
+
+//pull the delivery and user after updates info
     private void help(){
         Call<String> call3= rtfBase.getUser(ID);
         call3.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.code()==200){
-                    Log.i("wewewe1","????????1??????");
 
                     CourierUser=response.body();
 
                 }else{
-                    Toast.makeText(showChoosenDelivery.this, "something not good",Toast.LENGTH_LONG).show();
+                    Toast.makeText(showChoosenDelivery.this, "user id not exist",Toast.LENGTH_LONG).show();
 
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(showChoosenDelivery.this, "something not good-getUser",Toast.LENGTH_LONG).show();
+                Toast.makeText(showChoosenDelivery.this, t.getMessage(),Toast.LENGTH_LONG).show();
 
             }
         });
@@ -161,19 +154,18 @@ String TOKEN;
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.code()==200){
-                    Log.i("wewewe1","????????2??????");
 
-                    deliveryFromIntent=response.body();
+                    DELIVERY =response.body();
 
                 }else{
-                    Toast.makeText(showChoosenDelivery.this, "something not good",Toast.LENGTH_LONG).show();
+                    Toast.makeText(showChoosenDelivery.this, "delivery id not exist",Toast.LENGTH_LONG).show();
 
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(showChoosenDelivery.this, "something not good-getDelivery",Toast.LENGTH_LONG).show();
+                Toast.makeText(showChoosenDelivery.this, t.getMessage(),Toast.LENGTH_LONG).show();
 
             }
         });

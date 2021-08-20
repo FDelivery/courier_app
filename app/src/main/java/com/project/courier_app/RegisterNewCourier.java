@@ -26,15 +26,15 @@ public class RegisterNewCourier extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new_courier);
-        First = (EditText)findViewById(R.id.FirstName);
-        PasswordEt = (EditText)findViewById(R.id.passwordEt);
-        Last = (EditText)findViewById(R.id.LastName);
-        Phone1 = (EditText)findViewById(R.id.Phone1);
-        Phone2 = (EditText)findViewById(R.id.phone2);
-        Create=(Button)findViewById(R.id.Create);
-        payPage=(Button)findViewById(R.id.enter_bank);
-        EmailEt = (EditText)findViewById(R.id.EmailEt);
-        Vehicle = (EditText)findViewById(R.id.vehicle);
+        First = findViewById(R.id.FirstName);
+        PasswordEt = findViewById(R.id.passwordEt);
+        Last = findViewById(R.id.LastName);
+        Phone1 = findViewById(R.id.Phone1);
+        Phone2 = findViewById(R.id.phone2);
+        Create=findViewById(R.id.Create);
+        payPage=findViewById(R.id.enter_bank);
+        EmailEt = findViewById(R.id.EmailEt);
+        Vehicle = findViewById(R.id.vehicle);
         rtfBase=RetrofitBase.getRetrofitInterface();
 
 
@@ -107,7 +107,7 @@ public class RegisterNewCourier extends AppCompatActivity {
 
         });
     }
-
+//send courier and register
    private void handleRegister(Courier courier) {
 
 
@@ -117,10 +117,7 @@ public class RegisterNewCourier extends AppCompatActivity {
            public void onResponse(Call<String> call, Response<String> response) {
                if(response.code() == 200)
                {
-                   courier.setId(response.body());
-                   Toast.makeText(RegisterNewCourier.this, "registered successfully",Toast.LENGTH_LONG).show();
                    connectToApp(courier);
-
 
                }
                if(response.code() == 400)
@@ -141,29 +138,30 @@ public class RegisterNewCourier extends AppCompatActivity {
            }
        });
    }
+
+   //connect the app auto after register
     private void connectToApp(Courier courier){
 
-        HashMap<String, String> help = new HashMap<>();
-        help.put("email",courier.getEmail()) ;
-        help.put("password",courier.getPassword());
-        Call<String[]> call = rtfBase.connect(help); //we get token and id
+        HashMap<String, String> connect = new HashMap<>();
+        connect.put("email",courier.getEmail()) ;
+        connect.put("password",courier.getPassword());
+        Call<String[]> call = rtfBase.connect(connect); //we get token and id
         call.enqueue(new Callback<String[]>() {
             @Override
             public void onResponse(Call<String[]> call, Response<String[]> response) {
                 if(response.code() == 200)
                 {
                     assert response.body() != null;
-                    courier.setToken(response.body()[0]);
-                    courier.setId(response.body()[1]);
+
                     ID=response.body()[1];
                     TOKEN=response.body()[0];
 
-                    Toast.makeText(RegisterNewCourier.this, "successfully",Toast.LENGTH_LONG).show();
-                    GetUser(ID);
+                    Toast.makeText(RegisterNewCourier.this, "registered successfully",Toast.LENGTH_LONG).show();
+                    GetUser();
                 }
                 if(response.code() == 400)
                 {
-                    Toast.makeText(RegisterNewCourier.this, "we have a problem",Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterNewCourier.this, "fail to connect",Toast.LENGTH_LONG).show();
 
                 }
                 if(response.code() == 401)
@@ -183,11 +181,11 @@ public class RegisterNewCourier extends AppCompatActivity {
     }
 
     // get- in id, return user
-    public void GetUser(String id) // need to know how to use in accepted user
+    public void GetUser()
     {
 
         Intent intent = new Intent(this, CourierMain.class);
-        Call<String> call = rtfBase.getUser(id);
+        Call<String> call = rtfBase.getUser(ID);
 
         call.enqueue(new Callback<String>() {
             @Override
@@ -199,7 +197,7 @@ public class RegisterNewCourier extends AppCompatActivity {
 
                     //success
                     intent.putExtra("CourierUserInGson",response.body());
-                    intent.putExtra("id",id);
+                    intent.putExtra("id",ID);
                     intent.putExtra("token",TOKEN);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -218,7 +216,7 @@ public class RegisterNewCourier extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(RegisterNewCourier.this, "Something went wrong " +t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterNewCourier.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
             }
         });

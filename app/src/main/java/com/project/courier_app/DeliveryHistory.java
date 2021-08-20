@@ -25,8 +25,9 @@ public class DeliveryHistory extends AppCompatActivity {
 
     private RetrofitInterface rtfBase;
     Courier courier;
-    String CourierUser,ID,TOKEN,deliveryID;
+    String CourierUser,ID,TOKEN;
     ListView listView;
+    ArrayList<String> arraylist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,66 +38,30 @@ public class DeliveryHistory extends AppCompatActivity {
 
 
         Bundle extras = getIntent().getExtras();
+        Bundle args = getIntent().getBundleExtra("BUNDLE");
+
+
+        arraylist = (ArrayList<String>) args.getSerializable("ARRAYLIST");
 
         if(extras!=null) {
             CourierUser = extras.getString("CourierUserInGson");
             courier = new Gson().fromJson(CourierUser, Courier.class);
             ID = extras.getString("id");
             TOKEN = extras.getString(("token"));
+            helpArrayAdapter(arraylist);
+
         }
-
-        GetDeliveries(ID);
     }
 
 
-
-
-    private void GetDeliveries(String id) //this give us all deliveries that this id-user added
-    {
-        Call<List<String>> call = rtfBase.getDeliveriesHistory("DELIVERED",id);
-        ArrayList<String> arrayList=new ArrayList<>();
-        call.enqueue(new Callback<List<String>>() {
-            @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response)
-            {
-
-                if(response.code() == 400)
-                {
-                    Toast.makeText(DeliveryHistory.this, "you have no active deliveries",Toast.LENGTH_LONG).show();
-                    finish();
-                }
-                if(response.code() == 200)
-                {
-                    Log.i("TEST1", String.valueOf(response.body()));
-                    for(int i=0;i<response.body().size();i++) {
-                        String deliveryID=response.body().get(i).substring(18,42);
-                        Log.i("TEST6", deliveryID);
-
-                        Delivery delivery = new Gson().fromJson(response.body().get(i), Delivery.class);
-                        delivery.setId(deliveryID);
-                        arrayList.add(delivery.getClientName()+" "+delivery.getClientPhone()+"\nid="+deliveryID);
-                        help(arrayList);
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
-                Toast.makeText(DeliveryHistory.this, t.getMessage(),Toast.LENGTH_LONG).show();
-
-            }
-        });
-    }
-
-    private void help(ArrayList<String> arrayList){
+    //we put the arraylist in adapter
+    private void helpArrayAdapter(ArrayList<String> arrayList){
         ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Log.i("whatt",arrayList.get(position));
                 GetDelivery(arrayList.get(position).split("id=")[1]);
 
 
@@ -104,8 +69,8 @@ public class DeliveryHistory extends AppCompatActivity {
             }
         });
     }
-
-    private void GetDelivery(String idDelivery) //put delivery id and this return you the delivery
+    //open activity with delivery info
+    private void GetDelivery(String idDelivery)
     {
         Call<String> call = rtfBase.getDelivery(idDelivery);
         Intent intent=new Intent(this,showChosenFromHistory.class);
@@ -122,16 +87,11 @@ public class DeliveryHistory extends AppCompatActivity {
                 }
                 if(response.code() == 200)
                 {
-                    Log.i("TEST1",response.body());
-                    Delivery GSON = new Gson().fromJson(response.body(),Delivery.class);
-                    Log.i("TEST2",GSON.getClientName());
-                    Toast.makeText(DeliveryHistory.this, "We found your Delivery",Toast.LENGTH_LONG).show();
 
                     intent.putExtra("delivery",response.body());
                     intent.putExtra("idDelivery",idDelivery);
                     intent.putExtra("token",TOKEN);
                     intent.putExtra("id",ID);
-                   // intent.putExtra("businessUserInGson",FromIntent);
 
                     startActivity(intent);
 

@@ -28,13 +28,13 @@ public class CourierProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courier_profile);
 
-        EditMPage=(Button)findViewById(R.id.ChangeMP);
-        EmailMP=(TextView) findViewById(R.id.EmailMP);
+        EditMPage=findViewById(R.id.ChangeMP);
+        EmailMP= findViewById(R.id.EmailMP);
         PassChangeMP=(Button)findViewById(R.id.PassChangeMP);
-        TextMP=(TextView)findViewById(R.id.TextMP);
-        PhoneMP=(TextView)findViewById(R.id.PhoneMP);
-        Phone2MP=(TextView)findViewById(R.id.Phone2MP);
-        vehicleMP=(TextView)findViewById(R.id.vehicleMP);
+        TextMP=findViewById(R.id.TextMP);
+        PhoneMP=findViewById(R.id.PhoneMP);
+        Phone2MP=findViewById(R.id.Phone2MP);
+        vehicleMP=findViewById(R.id.vehicleMP);
         Bundle extras = getIntent().getExtras();
         if(extras!=null)
         {
@@ -42,14 +42,11 @@ public class CourierProfile extends AppCompatActivity {
             ID =extras.getString("id");
             TOKEN=extras.getString(("token"));
             courier = new Gson().fromJson(CourierUser, Courier.class);
-            courier.setId(ID);
 
         }
         TextMP.setText(courier.getFirstName()+ " "+courier.getLastName());
         EmailMP.setText("My email is: "+courier.getEmail());
-        Log.i("ppppp",courier.getEmail());
         PhoneMP.setText("My phone is: "+courier.getPrimaryPhone());
-       // Phone2MP.setText("My secondary phone is: "+courier.getSecondaryPhone());
 
         if((courier.getSecondaryPhone()!=null)&&(!courier.getSecondaryPhone().isEmpty()))
         {
@@ -62,17 +59,20 @@ public class CourierProfile extends AppCompatActivity {
         vehicleMP.setText("My vehicle is: "+courier.getVehicle());
 
 
+
+        //change profile info
         EditMPage.setOnClickListener((v) -> {
-            Intent intent2 =new Intent(this, EditMyProfile.class);
-            intent2.putExtra("id",ID);
-            intent2.putExtra("token",TOKEN);
-            Toast.makeText(CourierProfile.this, "fill JUST what you need", Toast.LENGTH_LONG).show();
-            startActivity(intent2);
+            Intent intent =new Intent(this, EditMyProfile.class);
+            intent.putExtra("id",ID);
+            intent.putExtra("token",TOKEN);
+            Toast.makeText(CourierProfile.this, "fill JUST what you need", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
         });
 
+
+//change password
         PassChangeMP.setOnClickListener((v) -> {
-            Intent intent =new Intent(this, ChangePassword.class);
-            startActivity(intent);
+            startActivity(new Intent(this, ChangePassword.class));
         });
     }
 }
