@@ -64,7 +64,7 @@ public class CourierMain extends AppCompatActivity {
 
             startActivity(intent);
         });
-
+//show profile info and option to change
         myProfile.setOnClickListener((v) -> {
 
             intent =new Intent(this,CourierProfile.class);
@@ -95,7 +95,8 @@ public class CourierMain extends AppCompatActivity {
     private void getHistory() {
 
         Call<List<String>> call = rtfBase.getDeliveriesHistory("DELIVERED",ID);
-        ArrayList<String> arrayList=new ArrayList<>();
+        ArrayList<String> arrayListShow=new ArrayList<>();
+        ArrayList<String> arrayListId=new ArrayList<>();
         Intent intent =new Intent(this, DeliveryHistory.class);
         Bundle bundle = new Bundle();
         call.enqueue(new Callback<List<String>>() {
@@ -110,14 +111,16 @@ public class CourierMain extends AppCompatActivity {
                         delivery = new Gson().fromJson(response.body().get(i), Delivery.class);
                         if(delivery.getStatus().equals("DELIVERED")) {
                             deliveryID = response.body().get(i).substring(18, 42);
-                            arrayList.add(delivery.getClientName() + "\nNumber: " + delivery.getClientPhone() + "\nid=" + deliveryID);
+                            arrayListShow.add("Client Name: "+delivery.getClientName() + "\nNumber: " + delivery.getClientPhone());
+                            arrayListId.add(deliveryID);
                         }
                     }
-                    if (!arrayList.isEmpty()) {
+                    if (!arrayListShow.isEmpty()) {
                         intent.putExtra("CourierUserInGson",CourierUser);
                         intent.putExtra("token",TOKEN);
                         intent.putExtra("id",ID);
-                        bundle.putSerializable("ARRAYLIST",(Serializable)arrayList);
+                        bundle.putSerializable("arrayListShow",(Serializable)arrayListShow);
+                        bundle.putSerializable("arrayListId",(Serializable)arrayListId);
                         intent.putExtra("BUNDLE",bundle);
                         startActivity(intent);
                     }
@@ -141,7 +144,8 @@ public class CourierMain extends AppCompatActivity {
     //this give us all deliveries with status "COURIER_SEARCHING" and we can choose one
     private void chooseDelivery() {
         Call<List<String>> call = rtfBase.getDeliveries("COURIER_SEARCHING");
-        ArrayList<String> arrayList = new ArrayList<>();
+        ArrayList<String> arrayListShow=new ArrayList<>();
+        ArrayList<String> arrayListId=new ArrayList<>();
         Intent intent =new Intent(this, ChooseDelivery.class);
         Bundle bundle = new Bundle();
         call.enqueue(new Callback<List<String>>() {
@@ -156,15 +160,17 @@ public class CourierMain extends AppCompatActivity {
                         delivery = new Gson().fromJson(response.body().get(i), Delivery.class);
                         if(delivery.getStatus().equals("COURIER_SEARCHING")) {
                             deliveryID = response.body().get(i).substring(18, 42);
-                            arrayList.add(delivery.getClientName() + "\nNumber: " + delivery.getClientPhone() + "\nid=" + deliveryID);
+                            arrayListShow.add("Client Name: "+delivery.getClientName() + "\nNumber: " + delivery.getClientPhone());
+                            arrayListId.add(deliveryID);
                         }
                     }
 
-                    if (!arrayList.isEmpty()) {
+                    if (!arrayListShow.isEmpty()) {
                         intent.putExtra("token",TOKEN);
                         intent.putExtra("CourierUserInGson",CourierUser);
                         intent.putExtra("id",ID);
-                        bundle.putSerializable("ARRAYLIST",(Serializable)arrayList);
+                        bundle.putSerializable("arrayListShow",(Serializable)arrayListShow);
+                        bundle.putSerializable("arrayListId",(Serializable)arrayListId);
                         intent.putExtra("BUNDLE",bundle);
                         startActivity(intent);
                     }

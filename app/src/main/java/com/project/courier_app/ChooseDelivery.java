@@ -30,7 +30,7 @@ public class ChooseDelivery extends AppCompatActivity {
     String CourierUser,ID,TOKEN;
     public static Activity a;
     private Socket mSocket;
-    ArrayList<String> arraylist;
+    ArrayList<String> arrayListShow,arraylistId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +40,14 @@ public class ChooseDelivery extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         Bundle args = getIntent().getBundleExtra("BUNDLE");
-        arraylist = (ArrayList<String>) args.getSerializable("ARRAYLIST");
+        arrayListShow = (ArrayList<String>) args.getSerializable("arrayListShow");
+        arraylistId = (ArrayList<String>) args.getSerializable("arrayListId");
         mSocket = SocketIO.getSocket();
         mSocket.on("delivery_accepted_for_courier", (msg)-> {
-            helpArrayAdapter(arraylist);
+            helpArrayAdapter(arrayListShow);
 
         });
-        mSocket.on("delivery_posted", (msg)->helpArrayAdapter(arraylist));
+        mSocket.on("delivery_posted", (msg)->helpArrayAdapter(arrayListShow));
 
 
 
@@ -58,7 +59,7 @@ public class ChooseDelivery extends AppCompatActivity {
             ID =extras.getString("id");
             TOKEN=extras.getString("token");
 
-            helpArrayAdapter(arraylist);
+            helpArrayAdapter(arrayListShow);
         }
 
 
@@ -86,7 +87,7 @@ public class ChooseDelivery extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GetDelivery(arrayList.get(position).split("id=")[1]);
+                GetDelivery(arraylistId.get(position));
 
 
 

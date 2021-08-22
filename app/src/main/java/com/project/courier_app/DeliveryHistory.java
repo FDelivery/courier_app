@@ -27,7 +27,7 @@ public class DeliveryHistory extends AppCompatActivity {
     Courier courier;
     String CourierUser,ID,TOKEN;
     ListView listView;
-    ArrayList<String> arraylist;
+    ArrayList<String> arrayListShow,arraylistId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,14 +41,15 @@ public class DeliveryHistory extends AppCompatActivity {
         Bundle args = getIntent().getBundleExtra("BUNDLE");
 
 
-        arraylist = (ArrayList<String>) args.getSerializable("ARRAYLIST");
+        arrayListShow = (ArrayList<String>) args.getSerializable("arrayListShow");
+        arraylistId = (ArrayList<String>) args.getSerializable("arrayListId");
 
         if(extras!=null) {
             CourierUser = extras.getString("CourierUserInGson");
             courier = new Gson().fromJson(CourierUser, Courier.class);
             ID = extras.getString("id");
             TOKEN = extras.getString(("token"));
-            helpArrayAdapter(arraylist);
+            helpArrayAdapter(arrayListShow);
 
         }
     }
@@ -62,7 +63,7 @@ public class DeliveryHistory extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GetDelivery(arrayList.get(position).split("id=")[1]);
+                GetDelivery(arraylistId.get(position));
 
 
 
