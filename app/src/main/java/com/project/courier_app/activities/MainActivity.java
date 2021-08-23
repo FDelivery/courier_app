@@ -1,4 +1,4 @@
-package com.project.courier_app;
+package com.project.courier_app.activities;
 
  import retrofit2.Call;
  import retrofit2.Callback;
@@ -8,14 +8,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
- import android.util.Log;
  import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import java.util.HashMap;
+ import com.project.courier_app.R;
+ import com.project.courier_app.classes.RetrofitBase;
+ import com.project.courier_app.classes.RetrofitInterface;
+
+ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     private EditText EmailEt;

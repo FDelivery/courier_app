@@ -1,11 +1,10 @@
-package com.project.courier_app;
+package com.project.courier_app.activities;
 
 // in here the courier can see a list of his on done delivers
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,9 +12,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.project.courier_app.R;
+import com.project.courier_app.classes.Courier;
+import com.project.courier_app.classes.RetrofitBase;
+import com.project.courier_app.classes.RetrofitInterface;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

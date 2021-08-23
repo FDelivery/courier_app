@@ -1,16 +1,20 @@
-package com.project.courier_app;
+package com.project.courier_app.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.project.courier_app.R;
+import com.project.courier_app.classes.Courier;
+import com.project.courier_app.classes.Delivery;
+import com.project.courier_app.classes.RetrofitBase;
+import com.project.courier_app.classes.RetrofitInterface;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -58,7 +62,7 @@ public class CourierMain extends AppCompatActivity {
 
         //show the info of active delivery and option to change status (delivered,exception..)
         activeDelivery.setOnClickListener((v) -> {
-            intent= new Intent(this, activeDelivery.class);
+            intent= new Intent(this, com.project.courier_app.activities.activeDelivery.class);
             intent.putExtra("token",TOKEN);
             intent.putExtra("id",ID);
 

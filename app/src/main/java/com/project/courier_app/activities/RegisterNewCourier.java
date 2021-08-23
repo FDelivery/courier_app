@@ -1,13 +1,18 @@
-package com.project.courier_app;
+package com.project.courier_app.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.project.courier_app.R;
+import com.project.courier_app.classes.Courier;
+import com.project.courier_app.classes.RetrofitBase;
+import com.project.courier_app.classes.RetrofitInterface;
+import com.project.courier_app.classes.validations;
 
 import java.util.HashMap;
 
@@ -35,7 +40,7 @@ public class RegisterNewCourier extends AppCompatActivity {
         payPage=findViewById(R.id.enter_bank);
         EmailEt = findViewById(R.id.EmailEt);
         Vehicle = findViewById(R.id.vehicle);
-        rtfBase=RetrofitBase.getRetrofitInterface();
+        rtfBase= RetrofitBase.getRetrofitInterface();
 
 
         payPage.setOnClickListener( (v) -> {

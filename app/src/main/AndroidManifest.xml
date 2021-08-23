@@ -12,18 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Courierapp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".showChosenFromHistory"></activity>
-        <activity android:name=".activeDelivery" />
-        <activity android:name=".DetailsBank" />
-        <activity android:name=".EditMyProfile" />
-        <activity android:name=".ChangePassword" />
-        <activity android:name=".ChooseDelivery" />
-        <activity android:name=".CourierProfile" />
-        <activity android:name=".RegisterNewCourier" />
-        <activity android:name=".showChoosenDelivery" />
-        <activity android:name=".DeliveryHistory" />
-        <activity android:name=".CourierMain" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.showChosenFromHistory"></activity>
+        <activity android:name=".activities.activeDelivery" />
+        <activity android:name=".activities.DetailsBank" />
+        <activity android:name=".activities.EditMyProfile" />
+        <activity android:name=".activities.ChangePassword" />
+        <activity android:name=".activities.ChooseDelivery" />
+        <activity android:name=".activities.CourierProfile" />
+        <activity android:name=".activities.RegisterNewCourier" />
+        <activity android:name=".activities.showChoosenDelivery" />
+        <activity android:name=".activities.DeliveryHistory" />
+        <activity android:name=".activities.CourierMain" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

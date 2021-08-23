@@ -1,4 +1,4 @@
-package com.project.courier_app;
+package com.project.courier_app.classes;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

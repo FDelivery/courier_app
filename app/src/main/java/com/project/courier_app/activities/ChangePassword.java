@@ -1,4 +1,4 @@
-package com.project.courier_app;
+package com.project.courier_app.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.project.courier_app.R;
 
 import java.util.HashMap;
 

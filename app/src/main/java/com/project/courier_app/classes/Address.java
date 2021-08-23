@@ -1,4 +1,4 @@
-package com.project.courier_app;
+package com.project.courier_app.classes;
 
 public class Address {
     private String city;

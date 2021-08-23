@@ -1,4 +1,4 @@
-package com.project.courier_app;
+package com.project.courier_app.classes;
 // noting changed, completely copied from Business app
 
 public class Delivery

@@ -1,4 +1,4 @@
-package com.project.courier_app;
+package com.project.courier_app.activities;
 
 
 // in here the courier can see delivers and choose one
@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.project.courier_app.R;
+import com.project.courier_app.classes.Delivery;
+import com.project.courier_app.classes.RetrofitBase;
+import com.project.courier_app.classes.RetrofitInterface;
 
 import java.util.HashMap;
 
@@ -20,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class showChoosenDelivery extends AppCompatActivity {
-    private RetrofitInterface  rtfBase = RetrofitBase.getRetrofitInterface();
+    private RetrofitInterface rtfBase = RetrofitBase.getRetrofitInterface();
     private TextView deliveriInfo;
     private Button Choose;
 

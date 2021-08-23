@@ -1,13 +1,14 @@
-package com.project.courier_app;
+package com.project.courier_app.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.project.courier_app.R;
+import com.project.courier_app.classes.Delivery;
 
 public class showChosenFromHistory extends AppCompatActivity {
     private TextView showInfo;

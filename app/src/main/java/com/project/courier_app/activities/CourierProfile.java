@@ -1,17 +1,17 @@
-package com.project.courier_app;
+package com.project.courier_app.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.project.courier_app.R;
+import com.project.courier_app.classes.Courier;
 
 
 public class CourierProfile extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.project.courier_app;
+package com.project.courier_app.classes;
 
 import java.util.HashMap;
 import java.util.List;
