@@ -11,6 +11,8 @@ public class Delivery
     private String Time;
     private String deliveredDate;
     private double price;
+    private String status;
+    private String currentDelivery;
 
     public void setStatus(String status) {
         this.status = status;
@@ -20,13 +22,13 @@ public class Delivery
         return status;
     }
 
-    private String status;
+
 
     public void setCurrentDelivery(String currentDelivery) {
         this.currentDelivery = currentDelivery;
     }
 
-    private String currentDelivery;
+
     public void setPrice(double price) {
         this.price = price;
     }
@@ -59,6 +61,16 @@ public class Delivery
         this.deliveredDate = date;
         this.status=status;
 
+    }
+    public Delivery(String Id, Address clientAddress, String clientPhone, String clientName, String clientNote, String time, String date,String status) {
+        this.destAddress= clientAddress;
+        this.clientName = clientName;
+        this.clientPhone = clientPhone;
+        this.Time = time;
+        this.Note = clientNote;
+        this.deliveredDate = date;
+        this.status=status;
+        this.id = Id;
     }
 
     public String getClientPhone() {

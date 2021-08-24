@@ -85,7 +85,7 @@ public class showChoosenDelivery extends AppCompatActivity {
 
               }
               else{
-                  Toast.makeText(showChoosenDelivery.this, "delivery id not exist",Toast.LENGTH_LONG).show();
+                  Toast.makeText(showChoosenDelivery.this, "you already registered for a delivery",Toast.LENGTH_LONG).show();
 
               }
           }

@@ -5,18 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.project.courier_app.R;
+import com.project.courier_app.classes.Courier;
+import com.project.courier_app.classes.Delivery;
 import com.project.courier_app.classes.RetrofitBase;
 import com.project.courier_app.classes.RetrofitInterface;
 import com.project.courier_app.classes.SocketIO;
 
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import io.socket.client.Socket;
@@ -44,11 +49,16 @@ public class ChooseDelivery extends AppCompatActivity {
         arrayListShow = (ArrayList<String>) args.getSerializable("arrayListShow");
         arraylistId = (ArrayList<String>) args.getSerializable("arrayListId");
         mSocket = SocketIO.getSocket();
-        mSocket.on("delivery_accepted_for_courier", (msg)-> {
-            helpArrayAdapter(arrayListShow);
+        mSocket.on("delivery_accepted_for_courier", (msg)->runOnUiThread(() -> helpArrayAdapter(arrayListShow)));
+        mSocket.on("delivery_posted", (msg)-> {
+            Log.i("test", String.valueOf(msg[0]));
+            Delivery delivery = new Gson().fromJson(String.valueOf(msg[0]), (Type) Delivery.class);
+            delivery.setId(String.valueOf(msg[0]).substring(18, 42));
+            arraylistId.add(delivery.getId());
+            arrayListShow.add("Client Name: "+delivery.getClientName() + "\nNumber: " + delivery.getClientPhone());
+            runOnUiThread(() -> helpArrayAdapter(arrayListShow));
 
         });
-        mSocket.on("delivery_posted", (msg)->helpArrayAdapter(arrayListShow));
 
 
 
@@ -78,7 +88,6 @@ public class ChooseDelivery extends AppCompatActivity {
         mSocket.off("delivery_accepted");
         mSocket.off("delivery_accepted_for_courier");
     }
-
 
     //we put the arraylist in adapter
     private void helpArrayAdapter(ArrayList<String> arrayList){
