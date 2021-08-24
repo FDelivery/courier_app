@@ -13,43 +13,7 @@ public class Delivery
     private double price;
     private String status;
     private String currentDelivery;
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-
-
-    public void setCurrentDelivery(String currentDelivery) {
-        this.currentDelivery = currentDelivery;
-    }
-
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     private String id;
-
-    @Override
-    public String toString() {
-        return  " client name: "+clientName+ "\n client phone: "+clientPhone+"\n ADDRESS- city:"+destAddress.getCity()+
-                "\n apartment: "+destAddress.getApartment()+"\n number: "+destAddress.getNumber()+"\n price: "+price+ "\n note: "+Note;
-    }
-
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
 
     public Delivery(Address clientAddress, String clientPhone, String clientName, String clientNote, String time, String date,String status) {
@@ -77,36 +41,8 @@ public class Delivery
         return clientPhone;
     }
 
-    public void setClientPhone(String clientPhone) {
-        this.clientPhone = clientPhone;
-    }
-
-    public Address getClientAddress() {
-        return destAddress;
-    }
-
     public String getClientName() {
         return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public String getDate() {
-        return deliveredDate;
-    }
-
-    public void setDate(String date) {
-        this.deliveredDate = date;
-    }
-
-    public String getTime() {
-        return Time;
-    }
-
-    public void setTime(String time) {
-        this.Time = time;
     }
 
     public String getNote() {
@@ -117,8 +53,23 @@ public class Delivery
         Note = note;
     }
 
-    public void setClientAddress(Address clientAddress) {
-        this.destAddress = clientAddress;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+
+    @Override
+    public String toString() {
+        return  " client name: "+clientName+ "\n client phone: "+clientPhone+"\n ADDRESS- city:"+destAddress.getCity()+
+                "\n apartment: "+destAddress.getApartment()+"\n number: "+destAddress.getNumber()+"\n price: "+price+ "\n note: "+Note;
     }
 }
 
